@@ -12,17 +12,17 @@ var data = [
   {country: "USA", value: 1-0.706030660985181, rank: 11 }
 ];
 var qualityData = [
-  {country: 'SWE', value: -0.82, rank: 11},
-  {country: 'NOR', value: -0.6, rank:  10},
-  {country: 'FRA', value: -0.42, rank: 9},
-  {country: 'GER', value: -0.12, rank: 8},
-  {country: 'SWIZ', value:  -0.03, rank: 7},
-  {country: 'CAN', value: 0.15, rank:  6},
-  {country: 'US', value:  0.23, rank:  5},
-  {country: 'NETH', value:  0.29, rank:  4},
-  {country: 'NZ', value:  0.36, rank:  3},
-  {country: 'AUS', value: 0.38, rank:  2},
-  {country: 'UK', value:  0.56, rank:  1}
+  {country: 'SWE', value: 1-0.82, rank: 11},
+  {country: 'NOR', value: 1-0.6, rank:  10},
+  {country: 'FRA', value: 1-0.42, rank: 9},
+  {country: 'GER', value: 1-0.12, rank: 8},
+  {country: 'SWIZ', value:  1-0.03, rank: 7},
+  {country: 'CAN', value: 1.15, rank:  6},
+  {country: 'US', value:  1.23, rank:  5},
+  {country: 'NETH', value:  1.29, rank:  4},
+  {country: 'NZ', value:  1.36, rank:  3},
+  {country: 'AUS', value: 1.38, rank:  2},
+  {country: 'UK', value:  1.56, rank:  1}
 ]
 
 var w = 800;
@@ -110,9 +110,14 @@ function drawAxesAndLabels(params){
         .classed('alignLeft', true)
         .html('Note: See the methodology appendix for a description of how the performance score is calculated.')
     
+
+  }
+  if(params.average){
+  console.log(params.average)
     this.append('g')// average
         .classed('x axis', true)
         .attr('transform', 'translate(0,'+ 95 +')')
+        .attr('id', 'averageLine')
         .attr('fill', 'none')
         .attr('stroke', '#ccc')
         .call(params.axis.x)
@@ -125,8 +130,12 @@ function drawAxesAndLabels(params){
         .attr('stroke', 'none')
         .attr('fill', '#A9A9A9')
         .text('Eleven Country Average')
+  }else{
+    this.select('.x.axis')
+      .remove()
+    this.select('#averageLine')
+      .remove()
   }
-  
 }
 function plot(params){
   drawAxesAndLabels.call(this, params)
@@ -194,7 +203,8 @@ sort_overAll_btn.on('click', function(d){
       x: xAxis,
       y: yAxis
     },
-  initialize: false
+  initialize: false,
+  average: true
   })
 })
 
@@ -205,7 +215,8 @@ sort_quality_btn.on('click', function(d){
       x: xAxis,
       y: yAxis
     },
-  initialize: false
+  initialize: false,
+  average: false
   })
 })
 
@@ -215,7 +226,8 @@ plot.call(chart, {
     x: xAxis,
     y: yAxis
   },
-  initialize: true
+  initialize: true,
+  average: true
 });
 
 
