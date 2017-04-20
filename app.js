@@ -12,17 +12,69 @@ var data = [
   {country: "USA", value: 1-0.706030660985181, rank: 11 }
 ];
 var qualityData = [
-  {country: 'SWE', value: 1-0.82, rank: 11},
-  {country: 'NOR', value: 1-0.6, rank:  10},
-  {country: 'FRA', value: 1-0.42, rank: 9},
-  {country: 'GER', value: 1-0.12, rank: 8},
-  {country: 'SWIZ', value:  1-0.03, rank: 7},
-  {country: 'CAN', value: 1.15, rank:  6},
-  {country: 'US', value:  1.23, rank:  5},
-  {country: 'NETH', value:  1.29, rank:  4},
-  {country: 'NZ', value:  1.36, rank:  3},
+  {country: 'UK', value:  1.56, rank:  1},
   {country: 'AUS', value: 1.38, rank:  2},
-  {country: 'UK', value:  1.56, rank:  1}
+  {country: 'NZ', value:  1.36, rank:  3},
+  {country: 'NETH', value:  1.29, rank:  4},
+  {country: 'US', value:  1.23, rank:  5},
+  {country: 'CAN', value: 1.15, rank:  6},
+  {country: 'SWIZ', value:  1-0.03, rank: 7},
+  {country: 'GER', value: 1-0.12, rank: 8},
+  {country: 'FRA', value: 1-0.42, rank: 9},
+  {country: 'NOR', value: 1-0.6, rank:  10},
+  {country: 'SWE', value: 1-0.82, rank: 11}
+]
+var accessData = [
+{country: 'NETH', value:  0.7, rank: 1},
+{country: 'GER', value: 0.58, rank:  2},
+{country: 'UK', value:  0.39, rank:  3},
+{country: 'AUS', value: 0.19, rank:  4},
+{country: 'NZ', value:  0.14, rank:  5},
+{country: 'SWE', value: 0.06, rank:  6},
+{country: 'NOR', value: 0.02, rank:  7},
+{country: 'SWIZ', value:  -0.11, rank: 8},
+{country: 'FRA', value: -0.15, rank: 9},
+{country: 'CAN', value: -0.77, rank: 10},
+{country: 'US', value:  -1.07, rank: 11}
+]
+var adminData = [
+{country: 'AUS', value: 0.74, rank:  1},
+{country: 'NOR', value: 0.6, rank: 2},
+{country: 'UK', value:  0.59, rank:  3},
+{country: 'NZ', value:  0.54, rank:  4},
+{country: 'SWE', value: 0.26, rank:  5},
+{country: 'GER', value: 0.08, rank:  6},
+{country: 'CAN', value: 0.08, rank:  7},
+{country: 'SWIZ', value:  -0.12, rank: 8},
+{country: 'NETH', value:  -0.15, rank: 9},
+{country: 'US', value:  -1.21, rank: 10},
+{country: 'FRA', value: -1.41, rank: 11}
+]
+var equityData = [
+{country: 'SWE', value: 0.55, rank:  1},
+{country: 'NZ', value:  0.39, rank:  2},
+{country: 'SWIZ', value:  0.32, rank:  3},
+{country: 'NETH', value:  0.06, rank:  4},
+{country: 'GER', value: 0.01, rank:  5},
+{country: 'NOR', value: -0.09, rank: 6},
+{country: 'AUS', value: -0.14, rank: 7},
+{country: 'CAN', value: -0.39, rank: 8},
+{country: 'FRA', value: -0.53, rank: 9},
+{country: 'UK', value:  -0.63, rank: 10},
+{country: 'US', value:  -0.76, rank: 11}
+]
+var outcomesData = [
+{country: 'AUS', value: 0.62, rank:  1},
+{country: 'SWE', value: 0.55, rank:  2},
+{country: 'NZ', value:  0.39, rank:  3},
+{country: 'SWIZ', value:  0.32, rank:  4},
+{country: 'FRA', value: 0.23, rank:  5},
+{country: 'NETH', value:  0.06, rank:  6},
+{country: 'NOR', value: -0.09, rank: 7},
+{country: 'GER', value: -0.18, rank: 8},
+{country: 'CAN', value: -0.39, rank: 9},
+{country: 'UK', value:  -0.63, rank: 10},
+{country: 'US', value:  -0.76, rank: 11}
 ]
 
 var w = 800;
@@ -163,6 +215,8 @@ function plot(params){
 
   //update
   this.selectAll('.point')
+      .transition()
+      .duration(800)
       .attr('cx', function(d){
         return xPoints(d.rank);
       })
@@ -170,6 +224,8 @@ function plot(params){
         return y(d.value)
       })
   this.selectAll('.pointLabel')
+    .transition()
+    .duration(800)
     .attr('x', function(d, i){
       return xPoints(d.rank) - d.country.length*5;
     })
