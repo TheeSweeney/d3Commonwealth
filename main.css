@@ -26,9 +26,6 @@ body,html{
 	line-height: 0px;
 }
 
-#note{
-	fill: black;
-}
 
 .grad {
     fill: #4ABDBC; /* For browsers that do not support gradients */

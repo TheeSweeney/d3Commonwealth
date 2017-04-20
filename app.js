@@ -1,4 +1,3 @@
-//commented out behavior will eventually be turned into eleven country average line
 var data = [
   {country: "AUS", value: 1.360530419036175, rank: 1 },
   {country: "UK", value: 1.29399312764886, rank: 2 },
@@ -12,6 +11,7 @@ var data = [
   {country: "FRA", value: 1-0.41705654741814, rank: 10 },
   {country: "USA", value: 1-0.706030660985181, rank: 11 }
 ];
+var averageScore = 1.07261584411;
 
 var w = 800;
 var h = 450;
@@ -36,6 +36,11 @@ var x = d3.scale.linear()
           .domain(d3.extent(data, function(d){
             return d.rank;
           }))
+          .range([10, width]);
+var xPoints = d3.scale.linear()
+          .domain(d3.extent(data, function(d){
+            return d.rank;
+          }))
           .range([50, width]);
 var y = d3.scale.linear()
           .domain([0, d3.max(data, function(d){
@@ -45,11 +50,11 @@ var y = d3.scale.linear()
 var linearColorScale = d3.scale.linear()
                         .domain([0, data.length])
                         .range(['#4ABDBC','#044C7F']);
-// var xAxis = d3.svg.axis()
-//               .scale(x)
-//               .orient('bottom')
-//               .ticks(d3.time.days, 7)
-//               .tickFormat(d3.time.format('%m/%d'))
+var xAxis = d3.svg.axis()
+              .scale(x)
+              .orient('bottom')
+              .ticks(d3.time.days, 7)
+              .tickFormat(d3.time.format('%m/%d'))
 var yAxis = d3.svg.axis()
               .scale(y)
               .orient('left')
@@ -62,13 +67,9 @@ var sort_btn = controls.append('button')
                       .attr('state', 'quality')
 
 function plot(params){
-  // this.append('g')
-  //     .classed('x axis', true)
-  //     .attr('transform', 'translate(0,'+ height +')')
-  //     .call(params.axis.x)
 
   //TODO: factor out text for labels, and note so plot can but used on different charts
-  this.append('g')
+  this.append('g')//y axis
       .classed('y axis grad', true)
       .attr('transform', 'translate(0,0)')
       .call(params.axis.y)
@@ -90,8 +91,26 @@ function plot(params){
       .attr('id', 'note')
       .attr('x',0)
       .attr('y', height + 75)
+      .attr('fill', 'black')
+      .attr('stroke', 'none')
       .classed('alignLeft', true)
       .html('Note: See the methodology appendix for a description of how the performance score is calculated.')
+  
+  this.append('g')// average
+      .classed('x axis', true)
+      .attr('transform', 'translate(0,'+ 95 +')')
+      .attr('fill', 'none')
+      .attr('stroke', '#ccc')
+      .call(params.axis.x)
+
+  this.select('.x.axis')// average label
+      .append('text')
+      .attr('id', 'averageText')
+      .attr('x',8)
+      .attr('y',-10)
+      .attr('stroke', 'none')
+      .attr('fill', '#A9A9A9')
+      .text('Eleven Country Average')
   //enter()
   this.selectAll('.point')
       .data(params.data)
@@ -108,7 +127,7 @@ function plot(params){
       .enter()
         .append('text')
         .attr('x', function(d, i){
-          return x(d.rank) - d.country.length*5;
+          return xPoints(d.rank) - d.country.length*5;
         })
         .attr('y', function(d, i){
           return y(d.value) - 7;
@@ -122,7 +141,7 @@ function plot(params){
   //update
   this.selectAll('.point')
       .attr('cx', function(d){
-        return x(d.rank);
+        return xPoints(d.rank);
       })
       .attr('cy', function(d){
         return y(d.value)
@@ -137,7 +156,7 @@ function plot(params){
 plot.call(chart, {
   data: data,
   axis: {
-    // x: xAxis,
+    x: xAxis,
     y: yAxis
   }
 });
