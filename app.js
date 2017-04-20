@@ -49,7 +49,7 @@ var xAxis = d3.svg.axis()
 var yAxis = d3.svg.axis()
               .scale(y)
               .orient('left')
-              .ticks(5)
+              .ticks(0)
 var controls = d3.select('body')
                 .append('div')
                 .attr('id', 'controls');
