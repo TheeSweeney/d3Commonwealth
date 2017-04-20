@@ -5,6 +5,10 @@ body,html{
 	font-size: 0.95em;
 	text-align: center;
 }
+#container {
+	width: 800px;
+	margin: auto;
+}
 #chart{
 	background-color: #F5F2EB;
 	border: 1px solid #CCC;
@@ -27,4 +31,13 @@ body,html{
 	fill: none;
 	stroke: #ccc;
 	shape-rendering: crispEdges;
+}
+
+.alignLeft {
+	text-align: left;
+}
+
+.chartTitle {
+	font-size: 29px;
+	line-height: 0px;
 }
