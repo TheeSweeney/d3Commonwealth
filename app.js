@@ -1,16 +1,16 @@
 //commented out behavior will eventually be turned into eleven country average line
 var data = [
-  {key: "AUS", value: 1.360530419036175, rank: 1 },
-  {key: "UK", value: 1.29399312764886, rank: 2 },
-  {key: "NETH", value: 1.251787757074009, rank: 3 },
-  {key: "NZ", value: 1.151665180612727, rank: 4 },
-  {key: "NOR", value: 1.13376085186227, rank: 5 },
-  {key: "SWIZ", value: 1.0675352522899197, rank: 6 },
-  {key: "SWE", value: 1.0674114551491452, rank: 7 },
-  {key: "GER", value: 1.064104826992644, rank: 8 },
-  {key: "CAN", value: 1-0.247553882107696, rank: 9 },
-  {key: "FRA", value: 1-0.41705654741814, rank: 10 },
-  {key: "USA", value: 1-0.706030660985181, rank: 11 }
+  {country: "AUS", value: 1.360530419036175, rank: 1 },
+  {country: "UK", value: 1.29399312764886, rank: 2 },
+  {country: "NETH", value: 1.251787757074009, rank: 3 },
+  {country: "NZ", value: 1.151665180612727, rank: 4 },
+  {country: "NOR", value: 1.13376085186227, rank: 5 },
+  {country: "SWIZ", value: 1.0675352522899197, rank: 6 },
+  {country: "SWE", value: 1.0674114551491452, rank: 7 },
+  {country: "GER", value: 1.064104826992644, rank: 8 },
+  {country: "CAN", value: 1-0.247553882107696, rank: 9 },
+  {country: "FRA", value: 1-0.41705654741814, rank: 10 },
+  {country: "USA", value: 1-0.706030660985181, rank: 11 }
 ];
 
 var w = 800;
@@ -102,6 +102,23 @@ function plot(params){
         .style('fill', function(d,i){
           return linearColorScale(i)
         })
+
+  this.selectAll('.pointLabel')
+      .data(params.data)
+      .enter()
+        .append('text')
+        .attr('x', function(d, i){
+          return x(d.rank) - d.country.length*5;
+        })
+        .attr('y', function(d, i){
+          return y(d.value) - 7;
+        })
+        .classed('bar-label', true)
+        .attr('fill', 'black')
+        .text(function(d, i){
+          return d.country
+        })
+
   //update
   this.selectAll('.point')
       .attr('cx', function(d){
