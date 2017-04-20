@@ -1,3 +1,4 @@
+//commented out behavior will eventually be turned into eleven country average line
 var data = [
   {key: "AUS", value: 1.360530419036175, rank: 1 },
   {key: "UK", value: 1.29399312764886, rank: 2 },
@@ -38,12 +39,12 @@ var x = d3.scale.linear()
           .range([50, width]);
 var y = d3.scale.linear()
           .domain([0, d3.max(data, function(d){
-            return d.value;
+            return d.value + .1;
           })])
           .range([height, 0])
 var linearColorScale = d3.scale.linear()
                         .domain([0, data.length])
-                        .range(['#044C7F', '#4ABDBC']);
+                        .range(['#4ABDBC','#044C7F']);
 // var xAxis = d3.svg.axis()
 //               .scale(x)
 //               .orient('bottom')
@@ -53,29 +54,44 @@ var yAxis = d3.svg.axis()
               .scale(y)
               .orient('left')
               .ticks(0)
+
 var controls = d3.select('body')
                 .append('div')
                 .attr('id', 'controls');
-var sort_btn = controls.append('select')
+var sort_btn = controls.append('button')
                       .attr('state', 'quality')
-var options = sort_btn.selectAll('option')
-                      .data(categories)
-                      .enter()
-                      .append('option')
-                      .attr('value', function(d){
-                        return d
-                      })
-                      .text(function(d){})
+
 function plot(params){
   // this.append('g')
   //     .classed('x axis', true)
   //     .attr('transform', 'translate(0,'+ height +')')
   //     .call(params.axis.x)
+
+  //TODO: factor out text for labels, and note so plot can but used on different charts
   this.append('g')
-      .classed('y axis', true)
+      .classed('y axis grad', true)
       .attr('transform', 'translate(0,0)')
       .call(params.axis.y)
 
+  this.select('.y.axis')//Top Label
+      .append('text')
+      .attr('x',-10)
+      .attr('y',-10)
+      .text('Higher Performing')
+
+  this.select('.y.axis')//Bottom Label
+      .append('text')
+      .attr('x',-10)
+      .attr('y', height + 25)
+      .text('Lower Performing')
+  
+  this.select('g')//Note
+      .append('text')
+      .attr('id', 'note')
+      .attr('x',0)
+      .attr('y', height + 75)
+      .classed('alignLeft', true)
+      .html('Note: See the methodology appendix for a description of how the performance score is calculated.')
   //enter()
   this.selectAll('.point')
       .data(params.data)
