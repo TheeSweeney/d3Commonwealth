@@ -41,6 +41,9 @@ var y = d3.scale.linear()
             return d.value;
           })])
           .range([height, 0])
+var linearColorScale = d3.scale.linear()
+                        .domain([0, data.length])
+                        .range(['#044C7F', '#4ABDBC']);
 var xAxis = d3.svg.axis()
               .scale(x)
               .orient('bottom')
@@ -79,7 +82,10 @@ function plot(params){
       .enter()
         .append('circle')
         .classed('point', true)
-        .attr('r', 2);
+        .attr('r', 4)
+        .style('fill', function(d,i){
+          return linearColorScale(i)
+        })
   //update
   this.selectAll('.point')
       .attr('cx', function(d){
