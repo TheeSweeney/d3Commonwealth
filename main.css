@@ -10,29 +10,8 @@ body,html{
 	margin: auto;
 }
 #chart{
-	background-color: #F5F2EB;
 	border: 1px solid #CCC;
 }
-.bar{
-	fill: purple;
-	shape-rendering: crispEdges;
-}
-.bar-label{
-	fill: black;
-	text-anchor: middle;
-	font-size: 18px;
-}
-.axis path, .axis line{
-	fill: none;
-	stroke: #000;
-	shape-rendering: crispEdges;
-}
-.gridline path, .gridline line{
-	fill: none;
-	stroke: #ccc;
-	shape-rendering: crispEdges;
-}
-
 .alignLeft {
 	text-align: left;
 }
