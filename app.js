@@ -1,36 +1,17 @@
 var data = [
-  {key: "Jelly", value: 60, date: "2014/01/01" },
-  {key: "Jelly", value: 58, date: "2014/01/02" },
-  {key: "Jelly", value: 59, date: "2014/01/03" },
-  {key: "Jelly", value: 56, date: "2014/01/04" },
-  {key: "Jelly", value: 57, date: "2014/01/05" },
-  {key: "Jelly", value: 55, date: "2014/01/06" },
-  {key: "Jelly", value: 56, date: "2014/01/07" },
-  {key: "Jelly", value: 52, date: "2014/01/08" },
-  {key: "Jelly", value: 54, date: "2014/01/09" },
-  {key: "Jelly", value: 57, date: "2014/01/10" },
-  {key: "Jelly", value: 56, date: "2014/01/11" },
-  {key: "Jelly", value: 59, date: "2014/01/12" },
-  {key: "Jelly", value: 56, date: "2014/01/13" },
-  {key: "Jelly", value: 52, date: "2014/01/14" },
-  {key: "Jelly", value: 48, date: "2014/01/15" },
-  {key: "Jelly", value: 47, date: "2014/01/16" },
-  {key: "Jelly", value: 48, date: "2014/01/17" },
-  {key: "Jelly", value: 45, date: "2014/01/18" },
-  {key: "Jelly", value: 43, date: "2014/01/19" },
-  {key: "Jelly", value: 41, date: "2014/01/20" },
-  {key: "Jelly", value: 37, date: "2014/01/21" },
-  {key: "Jelly", value: 36, date: "2014/01/22" },
-  {key: "Jelly", value: 39, date: "2014/01/23" },
-  {key: "Jelly", value: 41, date: "2014/01/24" },
-  {key: "Jelly", value: 42, date: "2014/01/25" },
-  {key: "Jelly", value: 40, date: "2014/01/26" },
-  {key: "Jelly", value: 43, date: "2014/01/27" },
-  {key: "Jelly", value: 41, date: "2014/01/28" },
-  {key: "Jelly", value: 39, date: "2014/01/29" },
-  {key: "Jelly", value: 40, date: "2014/01/30" },
-  {key: "Jelly", value: 39, date: "2014/01/31" }
+  {key: "AUS", value: 1.360530419036175, date: 1 },
+  {key: "UK", value: 1.29399312764886, date: 2 },
+  {key: "NETH", value: 1.251787757074009, date: 3 },
+  {key: "NZ", value: 1.151665180612727, date: 4 },
+  {key: "NOR", value: 1.13376085186227, date: 5 },
+  {key: "SWIZ", value: 1.0675352522899197, date: 6 },
+  {key: "SWE", value: 1.0674114551491452, date: 7 },
+  {key: "GER", value: 1.064104826992644, date: 8 },
+  {key: "CAN", value: 1-0.247553882107696, date: 9 },
+  {key: "FRA", value: 1-0.41705654741814, date: 10 },
+  {key: "USA", value: 1-0.706030660985181, date: 11 }
 ];
+
 var w = 800;
 var h = 450;
 var margin = {
@@ -39,6 +20,7 @@ var margin = {
   left: 80,
   right: 40
 };
+var categories = [1,2,3,4,5]
 var width = w - margin.left - margin.right;
 var height = h - margin.top - margin.bottom;
 
@@ -49,11 +31,9 @@ var svg = d3.select("body").append("svg")
 var chart = svg.append("g")
       .classed("display", true)
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-var dateParser = d3.time.format('%Y/%m/%d').parse;
-var x = d3.time.scale()
+var x = d3.scale.linear()
           .domain(d3.extent(data, function(d){
-            var date = dateParser(d.date)
-            return date;
+            return d.date;
           }))
           .range([0, width]);
 var y = d3.scale.linear()
@@ -70,6 +50,19 @@ var yAxis = d3.svg.axis()
               .scale(y)
               .orient('left')
               .ticks(5)
+var controls = d3.select('body')
+                .append('div')
+                .attr('id', 'controls');
+var sort_btn = controls.append('select')
+                      .attr('state', 'quality')
+var options = sort_btn.selectAll('option')
+                      .data(categories)
+                      .enter()
+                      .append('option')
+                      .attr('value', function(d){
+                        return d
+                      })
+                      .text(function(d){})
 function plot(params){
   this.append('g')
       .classed('x axis', true)
@@ -90,8 +83,7 @@ function plot(params){
   //update
   this.selectAll('.point')
       .attr('cx', function(d){
-        var date = dateParser(d.date);
-        return x(date);
+        return x(d.date);
       })
       .attr('cy', function(d){
         return y(d.value)
