@@ -1,15 +1,15 @@
 var data = [
-  {key: "AUS", value: 1.360530419036175, date: 1 },
-  {key: "UK", value: 1.29399312764886, date: 2 },
-  {key: "NETH", value: 1.251787757074009, date: 3 },
-  {key: "NZ", value: 1.151665180612727, date: 4 },
-  {key: "NOR", value: 1.13376085186227, date: 5 },
-  {key: "SWIZ", value: 1.0675352522899197, date: 6 },
-  {key: "SWE", value: 1.0674114551491452, date: 7 },
-  {key: "GER", value: 1.064104826992644, date: 8 },
-  {key: "CAN", value: 1-0.247553882107696, date: 9 },
-  {key: "FRA", value: 1-0.41705654741814, date: 10 },
-  {key: "USA", value: 1-0.706030660985181, date: 11 }
+  {key: "AUS", value: 1.360530419036175, rank: 1 },
+  {key: "UK", value: 1.29399312764886, rank: 2 },
+  {key: "NETH", value: 1.251787757074009, rank: 3 },
+  {key: "NZ", value: 1.151665180612727, rank: 4 },
+  {key: "NOR", value: 1.13376085186227, rank: 5 },
+  {key: "SWIZ", value: 1.0675352522899197, rank: 6 },
+  {key: "SWE", value: 1.0674114551491452, rank: 7 },
+  {key: "GER", value: 1.064104826992644, rank: 8 },
+  {key: "CAN", value: 1-0.247553882107696, rank: 9 },
+  {key: "FRA", value: 1-0.41705654741814, rank: 10 },
+  {key: "USA", value: 1-0.706030660985181, rank: 11 }
 ];
 
 var w = 800;
@@ -33,9 +33,9 @@ var chart = svg.append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 var x = d3.scale.linear()
           .domain(d3.extent(data, function(d){
-            return d.date;
+            return d.rank;
           }))
-          .range([0, width]);
+          .range([50, width]);
 var y = d3.scale.linear()
           .domain([0, d3.max(data, function(d){
             return d.value;
@@ -44,11 +44,11 @@ var y = d3.scale.linear()
 var linearColorScale = d3.scale.linear()
                         .domain([0, data.length])
                         .range(['#044C7F', '#4ABDBC']);
-var xAxis = d3.svg.axis()
-              .scale(x)
-              .orient('bottom')
-              .ticks(d3.time.days, 7)
-              .tickFormat(d3.time.format('%m/%d'))
+// var xAxis = d3.svg.axis()
+//               .scale(x)
+//               .orient('bottom')
+//               .ticks(d3.time.days, 7)
+//               .tickFormat(d3.time.format('%m/%d'))
 var yAxis = d3.svg.axis()
               .scale(y)
               .orient('left')
@@ -67,10 +67,10 @@ var options = sort_btn.selectAll('option')
                       })
                       .text(function(d){})
 function plot(params){
-  this.append('g')
-      .classed('x axis', true)
-      .attr('transform', 'translate(0,'+ height +')')
-      .call(params.axis.x)
+  // this.append('g')
+  //     .classed('x axis', true)
+  //     .attr('transform', 'translate(0,'+ height +')')
+  //     .call(params.axis.x)
   this.append('g')
       .classed('y axis', true)
       .attr('transform', 'translate(0,0)')
@@ -89,7 +89,7 @@ function plot(params){
   //update
   this.selectAll('.point')
       .attr('cx', function(d){
-        return x(d.date);
+        return x(d.rank);
       })
       .attr('cy', function(d){
         return y(d.value)
@@ -104,7 +104,7 @@ function plot(params){
 plot.call(chart, {
   data: data,
   axis: {
-    x: xAxis,
+    // x: xAxis,
     y: yAxis
   }
 });
