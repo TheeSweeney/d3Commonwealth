@@ -1,6 +1,6 @@
 var data = [
-  {country: "AUS", value: 1.357430028143254, rank: 2 },
   {country: "UK", value: 1.367418713525976, rank: 1 },
+  {country: "AUS", value: 1.357430028143254, rank: 2 },
   {country: "NETH", value: 1.251787757074009, rank: 3 },
   {country: "NZ", value: 1.151665180612727, rank: 4 },
   {country: "NOR", value: 1.13376085186227, rank: 5 },
@@ -11,6 +11,19 @@ var data = [
   {country: "FRA", value: 1-0.41705654741814, rank: 10 },
   {country: "USA", value: 1-0.706030660985181, rank: 11 }
 ];
+var qualityData = [
+  {country: 'SWE', value: -0.82, rank: 11},
+  {country: 'NOR', value: -0.6, rank:  10},
+  {country: 'FRA', value: -0.42, rank: 9},
+  {country: 'GER', value: -0.12, rank: 8},
+  {country: 'SWIZ', value:  -0.03, rank: 7},
+  {country: 'CAN', value: 0.15, rank:  6},
+  {country: 'US', value:  0.23, rank:  5},
+  {country: 'NETH', value:  0.29, rank:  4},
+  {country: 'NZ', value:  0.36, rank:  3},
+  {country: 'AUS', value: 0.38, rank:  2},
+  {country: 'UK', value:  0.56, rank:  1}
+]
 
 var w = 800;
 var h = 450;
@@ -58,58 +71,67 @@ var yAxis = d3.svg.axis()
               .scale(y)
               .orient('left')
               .ticks(0)
-
+//sorting buttons
 var controls = d3.select('body')
                 .append('div')
                 .attr('id', 'controls');
-var sort_btn = controls.append('button')
-                      .attr('state', 'quality')
+var sort_overAll_btn = controls.append('button')
+                .html('Overall Scores')
+                .attr('state', 'quality')
+var sort_quality_btn = controls.append('button')
+                .html('Quality Scores')
+                .attr('state', 'quality')
+function drawAxesAndLabels(params){
+  if(params.initialize){
+    this.append('g')//y axis
+        .classed('y axis grad', true)
+        .attr('transform', 'translate(0,0)')
+        .call(params.axis.y)
 
+    this.select('.y.axis')//Top Label
+        .append('text')
+        .attr('x',-10)
+        .attr('y',-10)
+        .text('Higher Performing')
+
+    this.select('.y.axis')//Bottom Label
+        .append('text')
+        .attr('x',-10)
+        .attr('y', height + 25)
+        .text('Lower Performing')
+    
+    this.select('g')//Note
+        .append('text')
+        .attr('id', 'note')
+        .attr('x',0)
+        .attr('y', height + 75)
+        .attr('fill', 'black')
+        .attr('stroke', 'none')
+        .classed('alignLeft', true)
+        .html('Note: See the methodology appendix for a description of how the performance score is calculated.')
+    
+    this.append('g')// average
+        .classed('x axis', true)
+        .attr('transform', 'translate(0,'+ 95 +')')
+        .attr('fill', 'none')
+        .attr('stroke', '#ccc')
+        .call(params.axis.x)
+
+    this.select('.x.axis')// average label
+        .append('text')
+        .attr('id', 'averageText')
+        .attr('x',8)
+        .attr('y',-10)
+        .attr('stroke', 'none')
+        .attr('fill', '#A9A9A9')
+        .text('Eleven Country Average')
+  }
+  
+}
 function plot(params){
-
+  drawAxesAndLabels.call(this, params)
   //TODO: factor out text for labels, and note so plot can but used on different charts
-  this.append('g')//y axis
-      .classed('y axis grad', true)
-      .attr('transform', 'translate(0,0)')
-      .call(params.axis.y)
-
-  this.select('.y.axis')//Top Label
-      .append('text')
-      .attr('x',-10)
-      .attr('y',-10)
-      .text('Higher Performing')
-
-  this.select('.y.axis')//Bottom Label
-      .append('text')
-      .attr('x',-10)
-      .attr('y', height + 25)
-      .text('Lower Performing')
   
-  this.select('g')//Note
-      .append('text')
-      .attr('id', 'note')
-      .attr('x',0)
-      .attr('y', height + 75)
-      .attr('fill', 'black')
-      .attr('stroke', 'none')
-      .classed('alignLeft', true)
-      .html('Note: See the methodology appendix for a description of how the performance score is calculated.')
-  
-  this.append('g')// average
-      .classed('x axis', true)
-      .attr('transform', 'translate(0,'+ 95 +')')
-      .attr('fill', 'none')
-      .attr('stroke', '#ccc')
-      .call(params.axis.x)
-
-  this.select('.x.axis')// average label
-      .append('text')
-      .attr('id', 'averageText')
-      .attr('x',8)
-      .attr('y',-10)
-      .attr('stroke', 'none')
-      .attr('fill', '#A9A9A9')
-      .text('Eleven Country Average')
   //enter()
   this.selectAll('.point')
       .data(params.data)
@@ -125,17 +147,8 @@ function plot(params){
       .data(params.data)
       .enter()
         .append('text')
-        .attr('x', function(d, i){
-          return xPoints(d.rank) - d.country.length*5;
-        })
-        .attr('y', function(d, i){
-          return y(d.value) - 7;
-        })
-        .classed('bar-label', true)
-        .attr('fill', 'black')
-        .text(function(d, i){
-          return d.country
-        })
+        .classed('pointLabel', true)
+        
 
   //update
   this.selectAll('.point')
@@ -145,19 +158,64 @@ function plot(params){
       .attr('cy', function(d){
         return y(d.value)
       })
+  this.selectAll('.pointLabel')
+    .attr('x', function(d, i){
+      return xPoints(d.rank) - d.country.length*5;
+    })
+    .attr('y', function(d, i){
+      return y(d.value) - 7;
+    })
+    .attr('fill', 'black')
+    .text(function(d, i){
+      return d.country
+    })
+
+
   //exit()
   this.selectAll('.point')
       .data(params.data)
       .exit()
       .remove();
+  this.selectAll('.pointLabel')
+      .data(params.data)
+      .exit()
+      .remove();
+  this.selectAll('#note')
+      .data(params.data)
+      .exit()
+      .remove();
+
 }
+
+sort_overAll_btn.on('click', function(d){
+  plot.call(chart, {
+    data: data,
+    axis: {
+      x: xAxis,
+      y: yAxis
+    },
+  initialize: false
+  })
+})
+
+sort_quality_btn.on('click', function(d){
+  plot.call(chart, {
+    data: qualityData,
+    axis: {
+      x: xAxis,
+      y: yAxis
+    },
+  initialize: false
+  })
+})
 
 plot.call(chart, {
   data: data,
   axis: {
     x: xAxis,
     y: yAxis
-  }
+  },
+  initialize: true
 });
 
 
