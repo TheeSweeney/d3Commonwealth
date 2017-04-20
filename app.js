@@ -77,9 +77,11 @@ var controls = d3.select('body')
                 .attr('id', 'controls');
 var sort_overAll_btn = controls.append('button')
                 .html('Overall Scores')
+                .classed('btn', true)
                 .attr('state', 'quality')
 var sort_quality_btn = controls.append('button')
                 .html('Quality Scores')
+                .classed('btn', true)
                 .attr('state', 'quality')
 function drawAxesAndLabels(params){
   if(params.initialize){

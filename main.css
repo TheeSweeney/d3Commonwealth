@@ -26,6 +26,10 @@ body,html{
 	line-height: 0px;
 }
 
+.btn {
+	border-radius: 5px;
+	margin: 5px;
+}
 
 .grad {
     fill: #4ABDBC; /* For browsers that do not support gradients */
