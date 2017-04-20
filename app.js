@@ -1,6 +1,6 @@
 var data = [
-  {country: "AUS", value: 1.360530419036175, rank: 1 },
-  {country: "UK", value: 1.29399312764886, rank: 2 },
+  {country: "AUS", value: 1.357430028143254, rank: 2 },
+  {country: "UK", value: 1.367418713525976, rank: 1 },
   {country: "NETH", value: 1.251787757074009, rank: 3 },
   {country: "NZ", value: 1.151665180612727, rank: 4 },
   {country: "NOR", value: 1.13376085186227, rank: 5 },
@@ -11,7 +11,6 @@ var data = [
   {country: "FRA", value: 1-0.41705654741814, rank: 10 },
   {country: "USA", value: 1-0.706030660985181, rank: 11 }
 ];
-var averageScore = 1.07261584411;
 
 var w = 800;
 var h = 450;
