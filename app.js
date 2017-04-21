@@ -1,3 +1,5 @@
+$(document).ready(function(){
+
 var data = [
   {country: "UK", value: 1.367418713525976, rank: 1 },
   {country: "AUS", value: 1.357430028143254, rank: 2 },
@@ -89,9 +91,10 @@ var spendingData = [
   {country: 'SWIZ', value:  6787.00, rank:  10},
   {country: 'US', value:  9364.00, rank:  11}
 ]
-
-var w = 800;
-var h = 450;
+var currentDataSet = data;
+var avgShow = true;
+var w = window.outerWidth - 6;
+var h = .5625 * w;
 var margin = {
   top: 58,
   bottom: 100,
@@ -99,6 +102,7 @@ var margin = {
   right: 40
 };
 var categories = [1,2,3,4,5]
+// var width = parseInt(d3.select('#chart').style('width'), 10)
 var width = w - margin.left - margin.right;
 var height = h - margin.top - margin.bottom;
 
@@ -193,7 +197,7 @@ function drawAxesAndLabels(params){
     
 
   }
-  if(params.average){
+  if(params.average && !this.select('.x.axis')[0]){
     this.append('g')// average
         .classed('x axis', true)
         .attr('transform', 'translate(0,'+ 95 +')')
@@ -218,6 +222,7 @@ function drawAxesAndLabels(params){
   }
 }
 function plot(params){
+
   var yUpdate = d3.scale.linear()
           .domain([0, d3.max(params.data, function(d){
             return d.value + .1;
@@ -287,98 +292,124 @@ function plot(params){
 }
 
 sort_overAll_btn.on('click', function(d){
+  avgShow = true;
+  currentDataSet = data;
   plot.call(chart, {
-    data: data,
+    data: currentDataSet,
     axis: {
       x: xAxis,
       y: yAxis
     },
   initialize: false,
-  average: true
+  average: avgShow
   })
 })
 //TODO function factory
 sort_quality_btn.on('click', function(d){
+  avgShow = false;
+  currentDataSet = qualityData;
   plot.call(chart, {
-    data: qualityData,
+    data: currentDataSet,
     axis: {
       x: xAxis,
       y: yAxis
     },
   initialize: false,
-  average: false
+  average: avgShow
   })
 })
 
 sort_access_btn.on('click', function(d){
+  avgShow = false;
+  currentDataSet = accessData;
   plot.call(chart, {
-    data: accessData,
+    data: currentDataSet,
     axis: {
       x: xAxis,
       y: yAxis
     },
   initialize: false,
-  average: false
+  average: avgShow
   })
 })
 
 sort_admin_btn.on('click', function(d){
+  avgShow = false;
+  currentDataSet = adminData;
   plot.call(chart, {
-    data: adminData,
+    data: currentDataSet,
     axis: {
       x: xAxis,
       y: yAxis
     },
   initialize: false,
-  average: false
+  average: avgShow
   })
 })
 
 sort_equity_btn.on('click', function(d){
+  avgShow = false;
+  currentDataSet = equityData;
   plot.call(chart, {
-    data: equityData,
+    data: currentDataSet,
     axis: {
       x: xAxis,
       y: yAxis
     },
   initialize: false,
-  average: false
+  average: avgShow
   })
 })
 
 sort_outcomes_btn.on('click', function(d){
+  avgShow = false;
+  currentDataSet = outcomesData;
   plot.call(chart, {
-    data: outcomesData,
+    data: currentDataSet,
     axis: {
       x: xAxis,
       y: yAxis
     },
   initialize: false,
-  average: false
+  average: avgShow
   })
 })
 
 sort_spending_btn.on('click', function(d){
+  avgShow = false;
+  currentDataSet = spendingData;
   plot.call(chart, {
-    data: spendingData,
+    data: currentDataSet,
     axis: {
       x: xAxis,
       y: yAxis
     },
   initialize: false,
-  average: false
+  average: avgShow
   })
 })
 
 plot.call(chart, {
-  data: data,
+  data: currentDataSet,
   axis: {
     x: xAxis,
     y: yAxis
   },
   initialize: true,
-  average: true
+  average: avgShow
 });
-
-
-
+//responsive bahavior
+var btt = function(a){console.log(a)}
+window.addEventListener('resize', function(e){
+  // btt(e)
+  plot.call(chart, {
+      data: currentDataSet,
+      axis: {
+        x: xAxis,
+        y: yAxis
+      },
+      initialize: false,
+      average: avgShow
+    })
+  }, true)
+})
