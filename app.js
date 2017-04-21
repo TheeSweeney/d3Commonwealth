@@ -102,7 +102,6 @@ var margin = {
   right: 40
 };
 var categories = [1,2,3,4,5]
-// var width = parseInt(d3.select('#chart').style('width'), 10)
 var width = w - margin.left - margin.right;
 var height = h - margin.top - margin.bottom;
 
@@ -222,7 +221,9 @@ function drawAxesAndLabels(params){
   }
 }
 function plot(params){
+  
 
+  //dynamically adjust y axis onClick/resize
   var yUpdate = d3.scale.linear()
           .domain([0, d3.max(params.data, function(d){
             return d.value + .1;
@@ -289,6 +290,14 @@ function plot(params){
       .exit()
       .remove();
 
+}
+
+function resize(params){
+  w = window.outerWidth - 6;
+  h = .5625 * w;
+
+  x.range[10, width] 
+    
 }
 
 sort_overAll_btn.on('click', function(d){
@@ -402,6 +411,7 @@ plot.call(chart, {
 var btt = function(a){console.log(a)}
 window.addEventListener('resize', function(e){
   // btt(e)
+  resize()
   plot.call(chart, {
       data: currentDataSet,
       axis: {
@@ -412,4 +422,5 @@ window.addEventListener('resize', function(e){
       average: avgShow
     })
   }, true)
+
 })
