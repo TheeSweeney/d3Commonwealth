@@ -208,6 +208,12 @@ function drawAxesAndLabels(params){
   }
 }
 function plot(params){
+  var yUpdate = d3.scale.linear()
+          .domain([0, d3.max(params.data, function(d){
+            return d.value + .1;
+          })])
+          .range([height, 0])
+
   drawAxesAndLabels.call(this, params)
   //TODO: factor out text for labels, and note so plot can but used on different charts
   
@@ -237,7 +243,7 @@ function plot(params){
         return xPoints(d.rank);
       })
       .attr('cy', function(d){
-        return y(d.value)
+        return yUpdate(d.value)
       })
   this.selectAll('.pointLabel')
     .transition()
@@ -246,7 +252,7 @@ function plot(params){
       return xPoints(d.rank) - d.country.length*5;
     })
     .attr('y', function(d, i){
-      return y(d.value) - 7;
+      return yUpdate(d.value) - 7;
     })
     .attr('fill', 'black')
     .text(function(d, i){
