@@ -194,7 +194,6 @@ function drawAxesAndLabels(params){
 
   }
   if(params.average){
-  console.log(params.average)
     this.append('g')// average
         .classed('x axis', true)
         .attr('transform', 'translate(0,'+ 95 +')')
