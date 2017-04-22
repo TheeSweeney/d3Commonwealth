@@ -297,7 +297,10 @@ function resize(params){
   h = .5625 * w;
 
   x.range[10, width] 
-    
+ 
+  d3.select(chart.node().parentNode)
+        .attr('height', h)
+        .attr('width', w);
 }
 
 sort_overAll_btn.on('click', function(d){
@@ -408,17 +411,16 @@ plot.call(chart, {
   average: avgShow
 });
 //responsive bahavior
-var btt = function(a){console.log(a)}
 window.addEventListener('resize', function(e){
-  // btt(e)
   resize()
+  // chart.remove()
   plot.call(chart, {
       data: currentDataSet,
       axis: {
         x: xAxis,
         y: yAxis
       },
-      initialize: false,
+      initialize: true,
       average: avgShow
     })
   }, true)
