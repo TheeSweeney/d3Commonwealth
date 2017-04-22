@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-var data = [
+var data = [//TODO Rename this
   {country: "UK", value: 1.367418713525976, rank: 1 },
   {country: "AUS", value: 1.357430028143254, rank: 2 },
   {country: "NETH", value: 1.251787757074009, rank: 3 },
@@ -196,7 +196,7 @@ function drawAxesAndLabels(params){
     
 
   }
-  if(params.average && !this.select('.x.axis')[0]){
+  if(params.average){
     this.append('g')// average
         .classed('x axis', true)
         .attr('transform', 'translate(0,'+ 95 +')')
@@ -304,7 +304,7 @@ function resize(params){
 }
 
 sort_overAll_btn.on('click', function(d){
-  avgShow = true;
+  avgShow = true;//TODO there is a more efficient way to organize these variables
   currentDataSet = data;
   plot.call(chart, {
     data: currentDataSet,
