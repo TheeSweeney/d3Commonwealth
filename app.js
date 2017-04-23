@@ -106,7 +106,10 @@ var categories = [1,2,3,4,5]
 var width = w - margin.left - margin.right;
 var height = h - margin.top - margin.bottom;
 
-var svg = d3.select("body").append("svg")
+var controls = d3.select('#container')
+                .insert('div')
+                .attr('id', 'controls');
+var svg = d3.select("#container").insert("svg")
       .attr("id", "chart")
       .attr("width", w)
       .attr("height", h);
@@ -141,9 +144,6 @@ var yAxis = d3.svg.axis()
               .orient('left')
               .ticks(0)
 //sorting buttons
-var controls = d3.select('body')
-                .append('div')
-                .attr('id', 'controls');
 //TODO make button creation dryer
 var sort_overAll_btn = controls.append('button')
                 .html('Overall')
