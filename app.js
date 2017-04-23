@@ -180,12 +180,14 @@ function drawAxesAndLabels(params){
 
     this.select('.y.axis')//Top Label
         .append('text')
+        .style('font-size', '18px')
         .attr('x',-10)
         .attr('y',-15)
         .text('Higher Performing')
 
     this.select('.y.axis')//Bottom Label
         .append('text')
+        .style('font-size', '18px')
         .attr('x',-10)
         .attr('y', height + 25)
         .text('Lower Performing')
@@ -237,7 +239,7 @@ function plot(params){
           .range([height, 0])
 
   drawAxesAndLabels.call(this, params)
-  //TODO: factor out text for labels, and note so plot can but used on different charts
+  //TODO: factor out text for labels, and note so plot() can but used on different charts
   
   //enter()
   this.selectAll('.point')
