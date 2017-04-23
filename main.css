@@ -8,6 +8,9 @@ body,html{
 #container {
 	margin: auto;
 }
+#controls{
+  margin-bottom: 10px;
+}
 #chart{
 	border: 1px solid #CCC;
 }
