@@ -112,10 +112,10 @@ var controls = d3.select('#container')
 var svg = d3.select("#container").insert("svg")
       .attr("id", "chart")
       .attr("width", w)
-      .attr("height", h);
+      .attr("height", h + 50);
 var chart = svg.append("g")
       .classed("display", true)
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+      .attr("transform", "translate(" + margin.left + "," + (margin.top + 50) + ")");
 var x = d3.scale.linear()
           .domain(d3.extent(data, function(d){
             return d.rank;
@@ -168,6 +168,11 @@ var sort_spending_btn = controls.append('button')
                 .classed('btn', true)
 function drawAxesAndLabels(params){
   if(params.initialize){
+    svg.insert('text')
+      .attr('y', 40)
+      .classed('chartTitle', true)
+      .html('Health System Performance Score in Eleven Countries')
+
     this.append('g')//y axis
         .classed('y axis grad', true)
         .attr('transform', 'translate(0,0)')
@@ -176,7 +181,7 @@ function drawAxesAndLabels(params){
     this.select('.y.axis')//Top Label
         .append('text')
         .attr('x',-10)
-        .attr('y',-10)
+        .attr('y',-15)
         .text('Higher Performing')
 
     this.select('.y.axis')//Bottom Label
