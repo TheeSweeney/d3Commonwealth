@@ -1,3 +1,4 @@
+//BIG TODO - node.js refactor
 $(document).ready(function(){
 
 var data = [//TODO Rename this
