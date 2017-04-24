@@ -122,7 +122,6 @@ var currentTitle = dataSet.dataOverall.title
 var avgShow = true;
 var w = window.outerWidth - 6;
 var h = .5625 * w;
-console.log(w,"x",h)
 var margin = {
   top: 58,
   bottom: 100,
@@ -194,7 +193,7 @@ var sort_spending_btn = controls.append('button')
                 .html('Spending per Capita')
                 .classed('btn', true)
 function drawAxesAndLabels(params){
-  var usingStandardTitle = true;
+  var usingStandardAxesTitle = true;
   
   var axesLabels = {
     top: 'Higher Performing',
@@ -230,7 +229,7 @@ function drawAxesAndLabels(params){
         .attr('stroke', 'none')
         .classed('alignLeft', true)
         .html('Note: See the methodology appendix for a description of how the performance score is calculated.')
-
+        console.log('here')
   }
 
   if(currentDataSet == dataSet.spendingData.data){
@@ -241,15 +240,15 @@ function drawAxesAndLabels(params){
 
     yAxesAndLabels.call(this)
 
-    usingStandardTitle = false;
+    usingStandardAxesTitle = false;
   }
 
-  if(usingStandardTitle && !params.initialize){
+  if(usingStandardAxesTitle && !params.initialize){
     this.select('.y.axis')
         .remove()
     yAxesAndLabels.call(this)
 
-    usingStandardTitle = true;
+    usingStandardAxesTitle = true;
   }
 
   if(params.initialize){
@@ -370,7 +369,6 @@ function plot(params){
 function resize(params){
   w = window.outerWidth - 6;
   h = .5625 * w + 50;
-  console.log(w,"x",h)
 
   x.range[10, width] 
  
@@ -381,7 +379,7 @@ function resize(params){
 
   this.select('g')
       .remove()
-      
+
   plot.call(this, params)
 }
 
@@ -521,7 +519,7 @@ window.addEventListener('resize', function(e){
       x: xAxis,
       y: yAxis
     },
-    initialize: true,
+    initialize: false,
     average: avgShow
   });
   // chart.remove()
