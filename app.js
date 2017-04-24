@@ -392,12 +392,22 @@ function resize(params){
           }))
           .range([10, params.width]);
 
+  y = d3.scale.linear()
+          .domain([0, d3.max(params.data, function(d){
+            return d.value + .1;
+          })])
+          .range([params.height, 0])
+
 
   params.axis.x = d3.svg.axis()
                   .scale(x)
                   .orient('bottom')
                   .ticks(d3.time.days, 7)
                   .tickFormat(d3.time.format('%m/%d'))
+  params.axis.y = d3.svg.axis()
+              .scale(y)
+              .orient('left')
+              .ticks(0)
 
   x.range[10, width] 
  
