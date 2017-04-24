@@ -122,6 +122,7 @@ var currentTitle = dataSet.dataOverall.title
 var avgShow = true;
 var w = window.outerWidth - 6;
 var h = .5625 * w;
+console.log(w,"x",h)
 var margin = {
   top: 58,
   bottom: 100,
@@ -368,13 +369,17 @@ function plot(params){
 
 function resize(params){
   w = window.outerWidth - 6;
-  h = .5625 * w;
+  h = .5625 * w + 50;
+  console.log(w,"x",h)
 
   x.range[10, width] 
  
-  d3.select(chart.node().parentNode)
+ //change chart size
+  d3.select(this.node().parentNode)
         .attr('height', h)
         .attr('width', w);
+
+
 }
 
 
@@ -506,17 +511,17 @@ plot.call(chart, {
 
 //responsive bahavior
 window.addEventListener('resize', function(e){
-  resize()
+  resize.call(chart)
   // chart.remove()
-  plot.call(chart, {
-      data: currentDataSet,
-      axis: {
-        x: xAxis,
-        y: yAxis
-      },
-      initialize: true,
-      average: avgShow
-    })
+  // plot.call(chart, {
+  //     data: currentDataSet,
+  //     axis: {
+  //       x: xAxis,
+  //       y: yAxis
+  //     },
+  //     initialize: true,
+  //     average: avgShow
+  //   })
   }, true)
 
 })
