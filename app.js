@@ -229,7 +229,6 @@ function drawAxesAndLabels(params){
         .attr('stroke', 'none')
         .classed('alignLeft', true)
         .html('Note: See the methodology appendix for a description of how the performance score is calculated.')
-        console.log('here')
   }
 
   if(currentDataSet == dataSet.spendingData.data){
@@ -302,7 +301,7 @@ function plot(params){
           .domain([0, d3.max(params.data, function(d){
             return d.value + .1;
           })])
-          .range([height, 0])
+          .range([params.height, 0])
 
   drawAxesAndLabels.call(this, params)
   //TODO: factor out text for labels, and note so plot() can but used on different charts
@@ -369,7 +368,8 @@ function plot(params){
 function resize(params){
   w = window.outerWidth - 6;
   h = .5625 * w + 50;
-
+  params.height = h - margin.top - margin.bottom;
+  console.log(params.height)
   x.range[10, width] 
  
  //change chart size
@@ -506,7 +506,8 @@ plot.call(chart, {
     y: yAxis
   },
   initialize: true,
-  average: avgShow
+  average: avgShow,
+  height: height
 });
 
 
