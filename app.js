@@ -193,12 +193,14 @@ var sort_spending_btn = controls.append('button')
                 .html('Spending per Capita')
                 .classed('btn', true)
 function drawAxesAndLabels(params){
-  if(params.initialize){
-    svg.insert('text')
-      .attr('y', 40)
-      .classed('chartTitle', true)
-      .html(params.title)
+  var usingStandardTitle = true;
+  
+  var axesLabels = {
+    top: 'Higher Performing',
+    bottom: 'Lower Performing'
+  }
 
+  function yAxesAndLabels() {
     this.append('g')//y axis
         .classed('y axis grad', true)
         .attr('transform', 'translate(0,0)')
@@ -209,15 +211,15 @@ function drawAxesAndLabels(params){
         .style('font-size', '18px')
         .attr('x',-10)
         .attr('y',-15)
-        .text('Higher Performing')
+        .text(axesLabels.top)
 
     this.select('.y.axis')//Bottom Label
         .append('text')
         .style('font-size', '18px')
         .attr('x',-10)
         .attr('y', height + 25)
-        .text('Lower Performing')
-    
+        .text(axesLabels.bottom)
+
     this.select('g')//Note
         .append('text')
         .attr('id', 'note')
@@ -227,6 +229,36 @@ function drawAxesAndLabels(params){
         .attr('stroke', 'none')
         .classed('alignLeft', true)
         .html('Note: See the methodology appendix for a description of how the performance score is calculated.')
+
+  }
+
+  if(currentDataSet == dataSet.spendingData.data){
+    axesLabels.top = 'Higher Spending';
+    axesLabels.bottom = 'Lower Spending';
+    this.select('.y.axis')
+        .remove()
+
+    yAxesAndLabels.call(this)
+
+    usingStandardTitle = false;
+  }
+
+  if(usingStandardTitle && !params.initialize){
+    this.select('.y.axis')
+        .remove()
+    yAxesAndLabels.call(this)
+
+    usingStandardTitle = true;
+  }
+
+  if(params.initialize){
+    svg.insert('text')
+      .attr('y', 40)
+      .classed('chartTitle', true)
+      .html(params.title)
+
+    yAxesAndLabels.call(this)
+    
   }
 
   if(!params.initialize){
