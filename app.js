@@ -379,7 +379,10 @@ function resize(params){
         .attr('height', h)
         .attr('width', w);
 
-
+  this.select('g')
+      .remove()
+      
+  plot.call(this, params)
 }
 
 
@@ -511,7 +514,16 @@ plot.call(chart, {
 
 //responsive bahavior
 window.addEventListener('resize', function(e){
-  resize.call(chart)
+  resize.call(chart, {
+    data: currentDataSet,
+    title: currentTitle,
+    axis: {
+      x: xAxis,
+      y: yAxis
+    },
+    initialize: true,
+    average: avgShow
+  });
   // chart.remove()
   // plot.call(chart, {
   //     data: currentDataSet,
