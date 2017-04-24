@@ -135,36 +135,44 @@ var height = h - margin.top - margin.bottom;
 var controls = d3.select('#container')
                 .insert('div')
                 .attr('id', 'controls');
+
 var svg = d3.select("#container").insert("svg")
       .attr("id", "chart")
       .attr("width", w)
       .attr("height", h + 50);
+
 var chart = svg.append("g")
       .classed("display", true)
       .attr("transform", "translate(" + margin.left + "," + (margin.top + 50) + ")");
+
 var x = d3.scale.linear()
           .domain(d3.extent(dataSet.dataOverall.data, function(d){
             return d.rank;
           }))
           .range([10, width]);
+
 var xPoints = d3.scale.linear()
           .domain(d3.extent(dataSet.dataOverall.data, function(d){
             return d.rank;
           }))
           .range([50, width]);
+
 var y = d3.scale.linear()
           .domain([0, d3.max(dataSet.dataOverall.data, function(d){
             return d.value + .1;
           })])
           .range([height, 0])
+
 var linearColorScale = d3.scale.linear()
                         .domain([0, dataSet.dataOverall.data.length])
                         .range(['#4ABDBC','#044C7F']);
+
 var xAxis = d3.svg.axis()
               .scale(x)
               .orient('bottom')
               .ticks(d3.time.days, 7)
               .tickFormat(d3.time.format('%m/%d'))
+              
 var yAxis = d3.svg.axis()
               .scale(y)
               .orient('left')
@@ -302,6 +310,12 @@ function plot(params){
             return d.value + .1;
           })])
           .range([params.height, 0])
+  //dynamically adjust x axis on resize
+  var xPointsUpdate = d3.scale.linear()
+                        .domain(d3.extent(params.data, function(d){
+                          return d.rank;
+                        }))
+                        .range([50, params.width])
 
   drawAxesAndLabels.call(this, params)
   //TODO: factor out text for labels, and note so plot() can but used on different charts
@@ -329,7 +343,7 @@ function plot(params){
       .transition()
       .duration(800)
       .attr('cx', function(d){
-        return xPoints(d.rank);
+        return xPointsUpdate(d.rank);
       })
       .attr('cy', function(d){
         return yUpdate(d.value)
@@ -338,7 +352,7 @@ function plot(params){
     .transition()
     .duration(800)
     .attr('x', function(d, i){
-      return xPoints(d.rank) - d.country.length*5;
+      return xPointsUpdate(d.rank) - d.country.length*5;
     })
     .attr('y', function(d, i){
       return yUpdate(d.value) - 7;
@@ -368,7 +382,10 @@ function plot(params){
 function resize(params){
   w = window.outerWidth - 6;
   h = .5625 * w + 50;
+
   params.height = h - margin.top - margin.bottom;
+  params.width = w - margin.left - margin.right;
+
   console.log(params.height)
   x.range[10, width] 
  
@@ -507,7 +524,8 @@ plot.call(chart, {
   },
   initialize: true,
   average: avgShow,
-  height: height
+  height: height,
+  width: width
 });
 
 
