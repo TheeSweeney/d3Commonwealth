@@ -171,6 +171,7 @@ var xAxis = d3.svg.axis()
               .scale(x)
               .orient('bottom')
               .ticks(0)
+              .tickSize(0)
 
 var yAxis = d3.svg.axis()
               .scale(y)
