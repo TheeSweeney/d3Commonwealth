@@ -315,7 +315,7 @@ function plot(params){
                           return d.rank;
                         }))
                         .range([50, params.width])
-  
+
   drawAxesAndLabels.call(this, params)
   //TODO: factor out text for labels, and note so plot() can but used on different charts
   
@@ -383,8 +383,8 @@ function resize(params){
   h = .5625 * w + 50;
   var test = params.xAxis
 
-  params.height = h - margin.top - margin.bottom;
-  params.width = w - margin.left - margin.right;
+  height = params.height = h - margin.top - margin.bottom;
+  width = params.width = w - margin.left - margin.right;
   
   x = d3.scale.linear()
           .domain(d3.extent(params.data, function(d){
@@ -426,7 +426,9 @@ sort_overAll_btn.on('click', function(d){
       y: yAxis
     },
   initialize: false,
-  average: avgShow
+  average: avgShow,
+  height: height,
+  width: width
   })
 })
 //TODO function factory
@@ -442,7 +444,9 @@ sort_quality_btn.on('click', function(d){
       y: yAxis
     },
   initialize: false,
-  average: avgShow
+  average: avgShow,
+  height: height,
+  width: width
   })
 })
 
@@ -458,7 +462,9 @@ sort_access_btn.on('click', function(d){
       y: yAxis
     },
   initialize: false,
-  average: avgShow
+  average: avgShow,
+  height: height,
+  width: width
   })
 })
 
@@ -474,7 +480,9 @@ sort_admin_btn.on('click', function(d){
       y: yAxis
     },
   initialize: false,
-  average: avgShow
+  average: avgShow,
+  height: height,
+  width: width
   })
 })
 
@@ -490,7 +498,9 @@ sort_equity_btn.on('click', function(d){
       y: yAxis
     },
   initialize: false,
-  average: avgShow
+  average: avgShow,
+  height: height,
+  width: width
   })
 })
 
@@ -506,7 +516,9 @@ sort_outcomes_btn.on('click', function(d){
       y: yAxis
     },
   initialize: false,
-  average: avgShow
+  average: avgShow,
+  height: height,
+  width: width
   })
 })
 
@@ -522,7 +534,9 @@ sort_spending_btn.on('click', function(d){
       y: yAxis
     },
   initialize: false,
-  average: avgShow
+  average: avgShow,
+  height: height,
+  width: width
   })
 })
 
