@@ -170,9 +170,8 @@ var linearColorScale = d3.scale.linear()
 var xAxis = d3.svg.axis()
               .scale(x)
               .orient('bottom')
-              .ticks(d3.time.days, 7)
-              .tickFormat(d3.time.format('%m/%d'))
-              
+              .ticks(0)
+
 var yAxis = d3.svg.axis()
               .scale(y)
               .orient('left')
@@ -316,7 +315,7 @@ function plot(params){
                           return d.rank;
                         }))
                         .range([50, params.width])
-
+  
   drawAxesAndLabels.call(this, params)
   //TODO: factor out text for labels, and note so plot() can but used on different charts
   
@@ -382,11 +381,24 @@ function plot(params){
 function resize(params){
   w = window.outerWidth - 6;
   h = .5625 * w + 50;
+  var test = params.xAxis
 
   params.height = h - margin.top - margin.bottom;
   params.width = w - margin.left - margin.right;
+  
+  x = d3.scale.linear()
+          .domain(d3.extent(params.data, function(d){
+            return d.rank;
+          }))
+          .range([10, params.width]);
 
-  console.log(params.height)
+
+  params.axis.x = d3.svg.axis()
+                  .scale(x)
+                  .orient('bottom')
+                  .ticks(d3.time.days, 7)
+                  .tickFormat(d3.time.format('%m/%d'))
+
   x.range[10, width] 
  
  //change chart size
