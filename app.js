@@ -307,12 +307,14 @@ function plot(params){
                         .range([50, params.width])
 
   drawAxesAndLabels.call(this, params)
-
-  this.select('g')//Note
+  console.log(params.height)
+  d3.select('#note')
+    .remove()
+  d3.select('.display')//Note
         .append('text')
         .attr('id', 'note')
         .attr('x',0)
-        .attr('y', height + 75)
+        .attr('y', params.height + 75)
         .attr('fill', 'black')
         .attr('stroke', 'none')
         .classed('alignLeft', true)
@@ -380,8 +382,7 @@ function plot(params){
 
 function resize(params){
   w = window.outerWidth - 6;
-  h = .5625 * w + 50;
-  var test = params.xAxis
+  h = .5625 * w;
 
   height = params.height = h - margin.top - margin.bottom;
   width = params.width = w - margin.left - margin.right;
@@ -413,7 +414,7 @@ function resize(params){
  
  //change chart size
   d3.select(this.node().parentNode)
-        .attr('height', h)
+        .attr('height', h + 50)
         .attr('width', w);
 
   this.select('g')
