@@ -225,17 +225,7 @@ function drawAxesAndLabels(params){
         .style('font-size', '18px')
         .attr('x',-10)
         .attr('y', height + 25)
-        .text(axesLabels.bottom)
-
-    this.select('g')//Note
-        .append('text')
-        .attr('id', 'note')
-        .attr('x',0)
-        .attr('y', height + 75)
-        .attr('fill', 'black')
-        .attr('stroke', 'none')
-        .classed('alignLeft', true)
-        .html('Note: See the methodology appendix for a description of how the performance score is calculated.')
+        .text(axesLabels.bottom)    
   }
 
   if(currentDataSet == dataSet.spendingData.data){
@@ -317,6 +307,16 @@ function plot(params){
                         .range([50, params.width])
 
   drawAxesAndLabels.call(this, params)
+
+  this.select('g')//Note
+        .append('text')
+        .attr('id', 'note')
+        .attr('x',0)
+        .attr('y', height + 75)
+        .attr('fill', 'black')
+        .attr('stroke', 'none')
+        .classed('alignLeft', true)
+        .html('Note: See the methodology appendix for a description of how the performance score is calculated.')
   //TODO: factor out text for labels, and note so plot() can but used on different charts
   
   //enter()
