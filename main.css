@@ -54,9 +54,5 @@ body,html{
 
 
 .grad {
-    fill: #4ABDBC; /* For browsers that do not support gradients */
-    fill: -webkit-linear-gradient(#4ABDBC,#044C7F); /* For Safari 5.1 to 6.0 */
-    fill: -o-linear-gradient(#4ABDBC,#044C7F); /* For Opera 11.1 to 12.0 */
-    fill: -moz-linear-gradient(#4ABDBC,#044C7F); /* For Firefox 3.6 to 15 */
-    fill: linear-gradient(#4ABDBC,#044C7F); /* Standard syntax */
+    fill: #4ABDBC;
 }

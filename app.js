@@ -184,6 +184,26 @@ var line = d3.svg.line()
       .y(function(d){
         return y(d.value);
       });
+//color gradient for y axis
+var defs = svg.append('defs')
+
+var gradient = defs.append('linearGradient')
+                  .attr('id', 'svgGradient')
+                  .attr('x1', '0%')
+                  .attr('x2', '0%')
+                  .attr('y1', '0%')
+                  .attr('y2', '100%')
+gradient.append('stop')
+        .attr('class', 'start')
+        .attr('offset', '0%')
+        .attr('stop-color', '#4ABDBC')
+        .attr('stop-opacity', 1);
+
+gradient.append('stop')
+        .attr('class', 'end')
+        .attr('offset', '100%')
+        .attr('stop-color', '#044C7F')
+        .attr('stop-opacity', 1);
 //sorting buttons
 //TODO make button creation DRYer
 var sort_overAll_btn = controls.append('button')
@@ -228,9 +248,11 @@ function drawAxesAndLabels(params){
         .attr('transform', 'translate(0,0)')
         .call(params.axis.y)
 
+
     this.select('.y.axis')//Top Label
         .append('text')
         .style('font-size', '18px')
+        .style('fill', '#4ABDBC')
         .attr('x',-10)
         .attr('y',-15)
         .text(axesLabels.top)
@@ -238,9 +260,15 @@ function drawAxesAndLabels(params){
     this.select('.y.axis')//Bottom Label
         .append('text')
         .style('font-size', '18px')
+        .style('fill', '#044C7F')
         .attr('x',-10)
         .attr('y', height + 25)
         .text(axesLabels.bottom)    
+    this.select('.domain')
+        .attr("fill", "url(#svgGradient)")
+
+      // .attr("stroke", "url(#svgGradient)")
+
   }
 
   if(currentDataSet == dataSet.spendingData.data){//change axes title for spending data
