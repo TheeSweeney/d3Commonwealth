@@ -353,8 +353,6 @@ function plot(params){
         .classed('point', true)
         .attr('r', 4)
         .style('fill', function(d,i){
-          counter++
-          console.log(i, " ", counter)
           return linearColorScale(i)
         })
 
