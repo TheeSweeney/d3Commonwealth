@@ -29,9 +29,14 @@ body,html{
   min-width: 707px;
 }
 
+.selectedBtn {
+  box-shadow: 0 0px 0px rgba(82,168,236,.8) inset, 0 0 8px rgba(82,168,236,.8);
+  outline: 0 none;
+}
 .btn {
   margin: 2px 5px 0 5px;
 }
+
 
 .grad {
     fill: #4ABDBC; /* For browsers that do not support gradients */

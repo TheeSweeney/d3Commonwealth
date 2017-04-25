@@ -181,24 +181,31 @@ var yAxis = d3.svg.axis()
 //TODO make button creation dryer
 var sort_overAll_btn = controls.append('button')
                 .html('Overall')
+                .attr('id', 'overAllBtn')
                 .classed('btn', true)
 var sort_quality_btn = controls.append('button')
                 .html('Quality')
+                .attr('id', 'qualityBtn')
                 .classed('btn', true)
 var sort_access_btn = controls.append('button')
                 .html('Access')
+                .attr('id', 'accessBtn')
                 .classed('btn', true)
 var sort_admin_btn = controls.append('button')
                 .html('Admin. Efficiency')
+                .attr('id', 'adminBtn')
                 .classed('btn', true)
 var sort_equity_btn = controls.append('button')
                 .html('Equity')
+                .attr('id', 'equityBtn')
                 .classed('btn', true)
 var sort_outcomes_btn = controls.append('button')
                 .html('Health Outcomes')
+                .attr('id', 'outcomesBtn')
                 .classed('btn', true)
 var sort_spending_btn = controls.append('button')
                 .html('Spending per Capita')
+                .attr('id', 'spendingBtn')
                 .classed('btn', true)
 function drawAxesAndLabels(params){
   var usingStandardAxesTitle = true;
@@ -308,7 +315,6 @@ function plot(params){
                         .range([50, params.width])
 
   drawAxesAndLabels.call(this, params)
-  console.log(params.height)
   d3.select('#note')
     .remove()
   d3.select('.display')//Note
@@ -424,10 +430,16 @@ function resize(params){
   plot.call(this, params)
 }
 
+function selectBtn(btnID){
+  $('.selectedBtn').removeClass('selectedBtn')
+  $('#'+btnID).addClass('selectedBtn')
+  console.log($(btnID))
+}
 
 
 sort_overAll_btn.on('click', function(d){
   avgShow = true;//TODO there is a more efficient way to organize these variables
+  selectBtn($(this)[0].id)
   currentDataSet = dataSet.dataOverall.data;
   currentTitle = dataSet.dataOverall.title;
   plot.call(chart, {
@@ -446,6 +458,7 @@ sort_overAll_btn.on('click', function(d){
 //TODO function factory
 sort_quality_btn.on('click', function(d){
   avgShow = false;
+  selectBtn($(this)[0].id)
   currentDataSet = dataSet.qualityData.data;
   currentTitle = dataSet.qualityData.title;
   plot.call(chart, {
@@ -464,6 +477,7 @@ sort_quality_btn.on('click', function(d){
 
 sort_access_btn.on('click', function(d){
   avgShow = false;
+  selectBtn($(this)[0].id)
   currentDataSet = dataSet.accessData.data;
   currentTitle = dataSet.accessData.title;
   plot.call(chart, {
@@ -482,6 +496,7 @@ sort_access_btn.on('click', function(d){
 
 sort_admin_btn.on('click', function(d){
   avgShow = false;
+  selectBtn($(this)[0].id)
   currentDataSet = dataSet.adminData.data;
   currentTitle = dataSet.adminData.title;
   plot.call(chart, {
@@ -500,6 +515,7 @@ sort_admin_btn.on('click', function(d){
 
 sort_equity_btn.on('click', function(d){
   avgShow = false;
+  selectBtn($(this)[0].id)
   currentDataSet = dataSet.equityData.data;
   currentTitle = dataSet.equityData.title;
   plot.call(chart, {
@@ -518,6 +534,7 @@ sort_equity_btn.on('click', function(d){
 
 sort_outcomes_btn.on('click', function(d){
   avgShow = false;
+  selectBtn($(this)[0].id)
   currentDataSet = dataSet.outcomesData.data;
   currentTitle = dataSet.outcomesData.title;
   plot.call(chart, {
@@ -536,6 +553,7 @@ sort_outcomes_btn.on('click', function(d){
 
 sort_spending_btn.on('click', function(d){
   avgShow = false;
+  selectBtn($(this)[0].id)
   currentDataSet = dataSet.spendingData.data;
   currentTitle = dataSet.spendingData.title;
   plot.call(chart, {
