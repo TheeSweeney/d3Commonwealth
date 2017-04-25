@@ -24,95 +24,95 @@ var dataSet =  {
     data: [
       {country: 'UK', value:  1.56, rank:  1},
       {country: 'AUS', value: 1.38, rank:  2},
-      {country: 'NZ', value:  1.36, rank:  3},
       {country: 'NETH', value:  1.29, rank:  4},
-      {country: 'US', value:  1.23, rank:  5},
-      {country: 'CAN', value: 1.15, rank:  6},
-      {country: 'SWIZ', value:  1-0.03, rank: 7},
-      {country: 'GER', value: 1-0.12, rank: 8},
-      {country: 'FRA', value: 1-0.42, rank: 9},
+      {country: 'NZ', value:  1.36, rank:  3},
       {country: 'NOR', value: 1-0.6, rank:  10},
-      {country: 'SWE', value: 1-0.82, rank: 11}
+      {country: 'SWIZ', value:  1-0.03, rank: 7},
+      {country: 'SWE', value: 1-0.82, rank: 11},
+      {country: 'GER', value: 1-0.12, rank: 8},
+      {country: 'CAN', value: 1.15, rank:  6},
+      {country: 'FRA', value: 1-0.42, rank: 9},
+      {country: 'USA', value:  1.23, rank:  5}
     ],
     title: 'Quality of Healthcare' + elevenCountries
   },
   accessData:{
     data: [
-      {country: 'NETH', value:  1.7, rank: 1},
-      {country: 'GER', value: 1.58, rank:  2},
       {country: 'UK', value:  1.39, rank:  3},
       {country: 'AUS', value: 1.19, rank:  4},
+      {country: 'NETH', value:  1.7, rank: 1},
       {country: 'NZ', value:  1.14, rank:  5},
-      {country: 'SWE', value: 1.06, rank:  6},
       {country: 'NOR', value: 1.02, rank:  7},
       {country: 'SWIZ', value:  1-0.11, rank: 8},
-      {country: 'FRA', value: 1-0.15, rank: 9},
+      {country: 'SWE', value: 1.06, rank:  6},
+      {country: 'GER', value: 1.58, rank:  2},
       {country: 'CAN', value: 1-0.77, rank: 10},
-      {country: 'US', value:  1-1.07, rank: 11}
+      {country: 'FRA', value: 1-0.15, rank: 9},
+      {country: 'USA', value:  1-1.07, rank: 11}
     ],
     title: 'Access to Healthcare' + elevenCountries
   },
   adminData:{
     data: [
-      {country: 'AUS', value: 2.74, rank:  1},
-      {country: 'NOR', value: 2.6, rank: 2},
       {country: 'UK', value:  2.59, rank:  3},
+      {country: 'AUS', value: 2.74, rank:  1},
+      {country: 'NETH', value:  2-0.15, rank: 9},
       {country: 'NZ', value:  2.54, rank:  4},
+      {country: 'NOR', value: 2.6, rank: 2},
+      {country: 'SWIZ', value:  2-0.12, rank: 8},
       {country: 'SWE', value: 2.26, rank:  5},
       {country: 'GER', value: 2.08, rank:  6},
       {country: 'CAN', value: 2.08, rank:  7},
-      {country: 'SWIZ', value:  2-0.12, rank: 8},
-      {country: 'NETH', value:  2-0.15, rank: 9},
-      {country: 'US', value:  2-1.21, rank: 10},
+      {country: 'USA', value:  2-1.21, rank: 10},
       {country: 'FRA', value: 2-1.41, rank: 11}
     ],
     title: 'Administrative Efficiency' + elevenCountries
   },
   equityData:{
     data: [
-      {country: 'SWE', value: 1.55, rank:  1},
-      {country: 'NZ', value:  1.39, rank:  2},
-      {country: 'SWIZ', value:  1.32, rank:  3},
-      {country: 'NETH', value:  1.06, rank:  4},
-      {country: 'GER', value: 1.01, rank:  5},
-      {country: 'NOR', value: 1-0.09, rank: 6},
+      {country: 'UK', value:  1-0.63, rank: 10},
       {country: 'AUS', value: 1-0.14, rank: 7},
+      {country: 'NETH', value:  1.06, rank:  4},
+      {country: 'NZ', value:  1.39, rank:  2},
+      {country: 'NOR', value: 1-0.09, rank: 6},
+      {country: 'SWIZ', value:  1.32, rank:  3},
+      {country: 'SWE', value: 1.55, rank:  1},
+      {country: 'GER', value: 1.01, rank:  5},
       {country: 'CAN', value: 1-0.39, rank: 8},
       {country: 'FRA', value: 1-0.53, rank: 9},
-      {country: 'UK', value:  1-0.63, rank: 10},
-      {country: 'US', value:  1-0.76, rank: 11}
+      {country: 'USA', value:  1-0.76, rank: 11}
     ],
     title: 'Equity' + elevenCountries
   },
   outcomesData:{
     data: [
+      {country: 'UK', value:  1-0.63, rank: 10},
       {country: 'AUS', value: 1.62, rank:  1},
-      {country: 'SWE', value: 1.55, rank:  2},
-      {country: 'NZ', value:  1.39, rank:  3},
-      {country: 'SWIZ', value:  1.32, rank:  4},
-      {country: 'FRA', value: 1.23, rank:  5},
       {country: 'NETH', value:  1.06, rank:  6},
+      {country: 'NZ', value:  1.39, rank:  3},
       {country: 'NOR', value: 1-0.09, rank: 7},
+      {country: 'SWIZ', value:  1.32, rank:  4},
+      {country: 'SWE', value: 1.55, rank:  2},
       {country: 'GER', value: 1-0.18, rank: 8},
       {country: 'CAN', value: 1-0.39, rank: 9},
-      {country: 'UK', value:  1-0.63, rank: 10},
-      {country: 'US', value:  1-0.76, rank: 11}
+      {country: 'FRA', value: 1.23, rank:  5},
+      {country: 'USA', value:  1-0.76, rank: 11}
     ],
     title: 'Healthcare Outcomes' + elevenCountries
   },
   spendingData:{
     data: [
-      {country: 'NOR', value: 4038.00, rank:  1},
       {country: 'UK', value:  4094.00, rank:  2},
       {country: 'AUS', value: 4207.00, rank:  3},
-      {country: 'FRA', value: 4620.00, rank:  4},
-      {country: 'CAN', value: 4724.00, rank:  5},
-      {country: 'GER', value: 5119.00, rank:  6},
       {country: 'NETH', value:  5277.00, rank:  7},
-      {country: 'SWE', value: 5306.00, rank:  8},
       {country: 'NZ', value:  6432.00, rank:  9},
+      {country: 'NOR', value: 4038.00, rank:  1},
       {country: 'SWIZ', value:  6787.00, rank:  10},
-      {country: 'US', value:  9364.00, rank:  11}
+      {country: 'SWE', value: 5306.00, rank:  8},
+      {country: 'GER', value: 5119.00, rank:  6},
+      {country: 'CAN', value: 4724.00, rank:  5},
+      {country: 'FRA', value: 4620.00, rank:  4},
+      {country: 'USA', value:  9364.00, rank:  11}
     ],
     title: 'Spending per Capita'
   }
@@ -236,7 +236,7 @@ function drawAxesAndLabels(params){
         .text(axesLabels.bottom)    
   }
 
-  if(currentDataSet == dataSet.spendingData.data){
+  if(currentDataSet == dataSet.spendingData.data){//change axes title for spending data
     axesLabels.top = 'Higher Spending';
     axesLabels.bottom = 'Lower Spending';
     this.select('.y.axis')
@@ -247,7 +247,7 @@ function drawAxesAndLabels(params){
     usingStandardAxesTitle = false;
   }
 
-  if(usingStandardAxesTitle && !params.initialize){
+  if(usingStandardAxesTitle && !params.initialize){//replot y axis on resize
     this.select('.y.axis')
         .remove()
     yAxesAndLabels.call(this)
@@ -274,6 +274,7 @@ function drawAxesAndLabels(params){
       .classed('chartTitle', true)
       .html(params.title)
   }
+
   if(params.average){
     this.append('g')// average
         .classed('x axis', true)
@@ -315,6 +316,7 @@ function plot(params){
                         .range([50, params.width])
 
   drawAxesAndLabels.call(this, params)
+
   d3.select('#note')
     .remove()
   d3.select('.display')//Note
