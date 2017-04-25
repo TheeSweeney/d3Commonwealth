@@ -315,8 +315,17 @@ function drawAxesAndLabels(params){
   this.selectAll('.trendLineLabel')
       .transition()
       .duration(800)
-      //compare to line420
-
+      .attr('x', function(d, i){
+        return xPointsUpdate(d.rank) - d.label.length*5;
+      })
+      .attr('y', function(d, i){
+        return yUpdate(d.value) - 7;
+      })
+      .attr('fill', 'black')
+      .text(function(d, i){
+        return d.label
+      })
+      
   //exit
   this.selectAll('.trendLine')
       .data([avgData])
@@ -623,7 +632,6 @@ window.addEventListener('resize', function(e){
       y: yAxis
     },
     initialize: false,
-    average: avgShow
   });
   // chart.remove()
   // plot.call(chart, {
