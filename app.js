@@ -292,15 +292,7 @@ function drawAxesAndLabels(params){
     {value: average, date: 11}
   ]
 
-
-
-  //u    
-
-  //x
-
-  
   //enter
-
   this.selectAll('.avgLine')
       .data([avgData])
       .enter()
