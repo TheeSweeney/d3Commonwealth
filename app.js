@@ -309,6 +309,12 @@ function plot(params){
     }, 0))/params.data.length
 
   var avgLine = d3.svg.line()
+                  .x(function(d){
+                    return d
+                  })
+                  .y(function(d){
+                    return d
+                  })
 
 
   //dynamically adjust y axis onClick/resize
@@ -340,7 +346,6 @@ function plot(params){
   //TODO: factor out text for labels, and note so plot() can but used on different charts
   
   //enter()
-  var counter = -1;
   this.selectAll('.point')
       .data(params.data)
       .enter()
@@ -348,7 +353,9 @@ function plot(params){
         .classed('point', true)
         .attr('r', 4)
         .style('fill', function(d,i){
-          return linearColorScale(counter)
+          counter++
+          console.log(i, " ", counter)
+          return linearColorScale(i)
         })
 
   this.selectAll('.pointLabel')
