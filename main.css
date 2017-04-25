@@ -37,10 +37,16 @@ body,html{
   margin: 2px 5px 0 5px;
 }
 
-.trendLine{
+.avgLine{
   fill: none;
   stroke: #ccc;
   stroke-width: 2px;
+}
+
+.avgLabel {
+  fill: #ccc;
+  text-anchor: left;
+  font-size: 18px;
 }
 
 

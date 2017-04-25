@@ -288,55 +288,63 @@ function drawAxesAndLabels(params){
     }, 0))/params.data.length
 
   var avgData = [
-    {value: average, date: 1, label: "butts"},
+    {value: average, date: 1, label: "Eleven Country Average"},
     {value: average, date: 11}
   ]
 
+
+
+  //u    
+
+  //x
+
+  
   //enter
-  this.selectAll('.trendLine')
+
+  this.selectAll('.avgLine')
       .data([avgData])
       .enter()
           .append('path')
-          .classed('trendLine', true)
+          .classed('avgLine', true)
 
-  this.select('.trendLineLabel')
-      .data([avgData])
-      .enter()
-          .append('text')
-          .classed('.trendLineLabel')
+  this.selectAll('.avgLabel')
+  .data(avgData)
+  .enter()
+    .append('text')
+    .classed('avgLabel', true)
+
   //update
-  this.selectAll('.trendLine')
+  this.selectAll('.avgLine')
       .transition()
       .duration(800)
       .attr('d', function(d){
         return line(d);
       })
-
-  this.selectAll('.trendLineLabel')
+      
+  this.selectAll('.avgLabel')
       .transition()
       .duration(800)
       .attr('x', function(d, i){
-        return xPointsUpdate(d.rank) - d.label.length*5;
+        return x(d.date)
       })
       .attr('y', function(d, i){
-        return yUpdate(d.value) - 7;
+        return y(d.value) - 8
       })
       .attr('fill', 'black')
       .text(function(d, i){
         return d.label
       })
-      
+
   //exit
-  this.selectAll('.trendLine')
+  this.selectAll('.avgLine')
       .data([avgData])
       .exit()
       .remove();
 
-  this.select('.trendLine')
-      .append('text')
-      .attr('stroke', 'none')
-      .attr('fill', '#A9A9A9')
-      .text('butts')
+    this.selectAll('.avgLabel')
+      .data(avgData)
+      .exit()
+      .remove()
 
 
 }
@@ -633,16 +641,6 @@ window.addEventListener('resize', function(e){
     },
     initialize: false,
   });
-  // chart.remove()
-  // plot.call(chart, {
-  //     data: currentDataSet,
-  //     axis: {
-  //       x: xAxis,
-  //       y: yAxis
-  //     },
-  //     initialize: true,
-  //     average: avgShow
-  //   })
   }, true)
 
 })
