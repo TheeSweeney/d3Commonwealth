@@ -278,6 +278,45 @@ function drawAxesAndLabels(params){
       .html(params.title)
   }
 
+  //calc average
+  var average = (params.data.reduce(function(acc, val){
+      return acc + val.value
+    }, 0))/params.data.length
+
+  var fakeData = [
+    {value: average, date: 1},
+    {value: average, date: 11}
+  ]
+  var xtest = d3.scale.linear()
+                .domain([0, d3.max(fakeData, function(d){
+                  return d.value
+                })])
+                .range([height, 0])
+  var ytest = d3.scale.linear()
+                .domain([0, d3.max(fakeData, function(d){
+                  return d.date
+                })])
+                .range([width, 0])
+  this.selectAll('.avgLine')
+      .data(fakeData)
+      .enter()
+          .append('circle')
+          .classed('avgLine', true)
+          .attr('r', 5)
+
+  this.selectAll('.avgLine')
+      .attr('cx', function(d){
+        return x(d.date)
+      })
+      .attr('cy', function(d){
+        return y(d.value)
+      })
+
+  this.selectAll('.avgLine')
+      .data(fakeData)
+      .exit()
+      .remove();
+
   if(params.average){
     this.append('g')// average
         .classed('x axis', true)
@@ -303,18 +342,6 @@ function drawAxesAndLabels(params){
   }
 }
 function plot(params){
-  //calc average
-  var average = (params.data.reduce(function(acc, val){
-      return acc + val.value
-    }, 0))/params.data.length
-
-  var avgLine = d3.svg.line()
-                  .x(function(d){
-                    return d
-                  })
-                  .y(function(d){
-                    return d
-                  })
 
 
   //dynamically adjust y axis onClick/resize
