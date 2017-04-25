@@ -14,7 +14,10 @@ body,html{
 #chart{
 	border: 1px solid #CCC;
 }
-
+#note{
+  fill: black;
+  stroke: none;
+}
 .axis path, .axis line{
 	shape-rendering: crispEdges;
 }

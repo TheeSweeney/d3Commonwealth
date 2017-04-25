@@ -365,8 +365,6 @@ function plot(params){
         .attr('id', 'note')
         .attr('x',0)
         .attr('y', params.height + 75)
-        .attr('fill', 'black')
-        .attr('stroke', 'none')
         .classed('alignLeft', true)
         .html('Note: See the methodology appendix for a description of how the performance score is calculated.')
   //TODO: factor out text for labels, and note so plot() can but used on different charts
