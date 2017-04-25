@@ -119,7 +119,6 @@ var dataSet =  {
 }
 var currentDataSet = dataSet.dataOverall.data;
 var currentTitle = dataSet.dataOverall.title
-var avgShow = true;
 var w = window.outerWidth - 6;
 var h = .5625 * w;
 var margin = {
@@ -178,10 +177,15 @@ var yAxis = d3.svg.axis()
               .orient('left')
               .ticks(0)
 
-
-
+var line = d3.svg.line()
+      .x(function(d){
+        return x(d.date);
+      })
+      .y(function(d){
+        return y(d.value);
+      });
 //sorting buttons
-//TODO make button creation dryer
+//TODO make button creation DRYer
 var sort_overAll_btn = controls.append('button')
                 .html('Overall')
                 .attr('id', 'overAllBtn')
@@ -283,63 +287,49 @@ function drawAxesAndLabels(params){
       return acc + val.value
     }, 0))/params.data.length
 
-  var fakeData = [
-    {value: average, date: 1},
+  var avgData = [
+    {value: average, date: 1, label: "butts"},
     {value: average, date: 11}
   ]
-  var xtest = d3.scale.linear()
-                .domain([0, d3.max(fakeData, function(d){
-                  return d.value
-                })])
-                .range([height, 0])
-  var ytest = d3.scale.linear()
-                .domain([0, d3.max(fakeData, function(d){
-                  return d.date
-                })])
-                .range([width, 0])
-  this.selectAll('.avgLine')
-      .data(fakeData)
+
+  //enter
+  this.selectAll('.trendLine')
+      .data([avgData])
       .enter()
-          .append('circle')
-          .classed('avgLine', true)
-          .attr('r', 5)
+          .append('path')
+          .classed('trendLine', true)
 
-  this.selectAll('.avgLine')
-      .attr('cx', function(d){
-        return x(d.date)
-      })
-      .attr('cy', function(d){
-        return y(d.value)
+  this.select('.trendLineLabel')
+      .data([avgData])
+      .enter()
+          .append('text')
+          .classed('.trendLineLabel')
+  //update
+  this.selectAll('.trendLine')
+      .transition()
+      .duration(800)
+      .attr('d', function(d){
+        return line(d);
       })
 
-  this.selectAll('.avgLine')
-      .data(fakeData)
+  this.selectAll('.trendLineLabel')
+      .transition()
+      .duration(800)
+      //compare to line420
+
+  //exit
+  this.selectAll('.trendLine')
+      .data([avgData])
       .exit()
       .remove();
 
-  if(params.average){
-    this.append('g')// average
-        .classed('x axis', true)
-        .attr('transform', 'translate(0,'+ 95 +')')
-        .attr('id', 'averageLine')
-        .attr('fill', 'none')
-        .attr('stroke', '#ccc')
-        .call(params.axis.x)
+  this.select('.trendLine')
+      .append('text')
+      .attr('stroke', 'none')
+      .attr('fill', '#A9A9A9')
+      .text('butts')
 
-    this.select('.x.axis')// average label
-        .append('text')
-        .attr('id', 'averageText')
-        .attr('x',8)
-        .attr('y',-10)
-        .attr('stroke', 'none')
-        .attr('fill', '#A9A9A9')
-        .text('Eleven Country Average')
-  }else{
-    this.select('.x.axis')
-      .remove()
-    this.select('#averageLine')
-      .remove()
-  }
+
 }
 function plot(params){
 
@@ -484,7 +474,7 @@ function selectBtn(btnID){
 
 
 sort_overAll_btn.on('click', function(d){
-  avgShow = true;//TODO there is a more efficient way to organize these variables
+  
   selectBtn($(this)[0].id)
   currentDataSet = dataSet.dataOverall.data;
   currentTitle = dataSet.dataOverall.title;
@@ -496,14 +486,13 @@ sort_overAll_btn.on('click', function(d){
       y: yAxis
     },
   initialize: false,
-  average: avgShow,
   height: height,
   width: width
   })
 })
 //TODO function factory
 sort_quality_btn.on('click', function(d){
-  avgShow = false;
+  
   selectBtn($(this)[0].id)
   currentDataSet = dataSet.qualityData.data;
   currentTitle = dataSet.qualityData.title;
@@ -515,14 +504,13 @@ sort_quality_btn.on('click', function(d){
       y: yAxis
     },
   initialize: false,
-  average: avgShow,
   height: height,
   width: width
   })
 })
 
 sort_access_btn.on('click', function(d){
-  avgShow = false;
+  
   selectBtn($(this)[0].id)
   currentDataSet = dataSet.accessData.data;
   currentTitle = dataSet.accessData.title;
@@ -534,14 +522,13 @@ sort_access_btn.on('click', function(d){
       y: yAxis
     },
   initialize: false,
-  average: avgShow,
   height: height,
   width: width
   })
 })
 
 sort_admin_btn.on('click', function(d){
-  avgShow = false;
+  
   selectBtn($(this)[0].id)
   currentDataSet = dataSet.adminData.data;
   currentTitle = dataSet.adminData.title;
@@ -553,14 +540,13 @@ sort_admin_btn.on('click', function(d){
       y: yAxis
     },
   initialize: false,
-  average: avgShow,
   height: height,
   width: width
   })
 })
 
 sort_equity_btn.on('click', function(d){
-  avgShow = false;
+  
   selectBtn($(this)[0].id)
   currentDataSet = dataSet.equityData.data;
   currentTitle = dataSet.equityData.title;
@@ -572,14 +558,13 @@ sort_equity_btn.on('click', function(d){
       y: yAxis
     },
   initialize: false,
-  average: avgShow,
   height: height,
   width: width
   })
 })
 
 sort_outcomes_btn.on('click', function(d){
-  avgShow = false;
+  
   selectBtn($(this)[0].id)
   currentDataSet = dataSet.outcomesData.data;
   currentTitle = dataSet.outcomesData.title;
@@ -591,14 +576,13 @@ sort_outcomes_btn.on('click', function(d){
       y: yAxis
     },
   initialize: false,
-  average: avgShow,
   height: height,
   width: width
   })
 })
 
 sort_spending_btn.on('click', function(d){
-  avgShow = false;
+  
   selectBtn($(this)[0].id)
   currentDataSet = dataSet.spendingData.data;
   currentTitle = dataSet.spendingData.title;
@@ -610,7 +594,6 @@ sort_spending_btn.on('click', function(d){
       y: yAxis
     },
   initialize: false,
-  average: avgShow,
   height: height,
   width: width
   })
@@ -625,7 +608,6 @@ plot.call(chart, {
     y: yAxis
   },
   initialize: true,
-  average: avgShow,
   height: height,
   width: width
 });

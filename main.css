@@ -37,6 +37,12 @@ body,html{
   margin: 2px 5px 0 5px;
 }
 
+.trendLine{
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 2px;
+}
+
 
 .grad {
     fill: #4ABDBC; /* For browsers that do not support gradients */
