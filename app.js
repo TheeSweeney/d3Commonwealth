@@ -331,6 +331,7 @@ function plot(params){
   //TODO: factor out text for labels, and note so plot() can but used on different charts
   
   //enter()
+  var counter = -1;
   this.selectAll('.point')
       .data(params.data)
       .enter()
@@ -338,7 +339,7 @@ function plot(params){
         .classed('point', true)
         .attr('r', 4)
         .style('fill', function(d,i){
-          return linearColorScale(i)
+          return linearColorScale(counter)
         })
 
   this.selectAll('.pointLabel')
@@ -352,6 +353,9 @@ function plot(params){
   this.selectAll('.point')
       .transition()
       .duration(800)
+      .style('fill', function(d, i){
+        return linearColorScale(d.rank)
+      })
       .attr('cx', function(d){
         return xPointsUpdate(d.rank);
       })
@@ -435,7 +439,6 @@ function resize(params){
 function selectBtn(btnID){
   $('.selectedBtn').removeClass('selectedBtn')
   $('#'+btnID).addClass('selectedBtn')
-  console.log($(btnID))
 }
 
 
