@@ -447,7 +447,7 @@ sort_overAll_btn.on('click', function(d){
   selectBtn($(this)[0].id)
   currentDataSet = dataSet.dataOverall.data;
   currentTitle = dataSet.dataOverall.title;
-  plot.call(chart, {
+  resize.call(chart, {
     data: currentDataSet,
     title: currentTitle,
     axis: {
@@ -466,7 +466,7 @@ sort_quality_btn.on('click', function(d){
   selectBtn($(this)[0].id)
   currentDataSet = dataSet.qualityData.data;
   currentTitle = dataSet.qualityData.title;
-  plot.call(chart, {
+  resize.call(chart, {
     data: currentDataSet,
     title: currentTitle,
     axis: {
@@ -485,7 +485,7 @@ sort_access_btn.on('click', function(d){
   selectBtn($(this)[0].id)
   currentDataSet = dataSet.accessData.data;
   currentTitle = dataSet.accessData.title;
-  plot.call(chart, {
+  resize.call(chart, {
     data: currentDataSet,
     title: currentTitle,
     axis: {
@@ -504,7 +504,7 @@ sort_admin_btn.on('click', function(d){
   selectBtn($(this)[0].id)
   currentDataSet = dataSet.adminData.data;
   currentTitle = dataSet.adminData.title;
-  plot.call(chart, {
+  resize.call(chart, {
     data: currentDataSet,
     title: currentTitle,
     axis: {
@@ -523,7 +523,7 @@ sort_equity_btn.on('click', function(d){
   selectBtn($(this)[0].id)
   currentDataSet = dataSet.equityData.data;
   currentTitle = dataSet.equityData.title;
-  plot.call(chart, {
+  resize.call(chart, {
     data: currentDataSet,
     title: currentTitle,
     axis: {
@@ -542,7 +542,7 @@ sort_outcomes_btn.on('click', function(d){
   selectBtn($(this)[0].id)
   currentDataSet = dataSet.outcomesData.data;
   currentTitle = dataSet.outcomesData.title;
-  plot.call(chart, {
+  resize.call(chart, {
     data: currentDataSet,
     title: currentTitle,
     axis: {
@@ -561,7 +561,7 @@ sort_spending_btn.on('click', function(d){
   selectBtn($(this)[0].id)
   currentDataSet = dataSet.spendingData.data;
   currentTitle = dataSet.spendingData.title;
-  plot.call(chart, {
+  resize.call(chart, {
     data: currentDataSet,
     title: currentTitle,
     axis: {
