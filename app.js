@@ -177,6 +177,9 @@ var yAxis = d3.svg.axis()
               .scale(y)
               .orient('left')
               .ticks(0)
+
+
+
 //sorting buttons
 //TODO make button creation dryer
 var sort_overAll_btn = controls.append('button')
@@ -300,7 +303,13 @@ function drawAxesAndLabels(params){
   }
 }
 function plot(params){
-  
+  //calc average
+  var average = (params.data.reduce(function(acc, val){
+      return acc + val.value
+    }, 0))/params.data.length
+
+  var avgLine = d3.svg.line()
+
 
   //dynamically adjust y axis onClick/resize
   var yUpdate = d3.scale.linear()
