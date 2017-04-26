@@ -267,7 +267,23 @@ function drawAxesAndLabels(params){
     this.select('.domain')
         .attr("fill", "url(#svgGradient)")
 
-      // .attr("stroke", "url(#svgGradient)")
+    this.select('g')//top Triangle
+        .append('path')
+        .attr('d', function(d){
+          return 'M 24,36 40,36 32,22 z';
+        })
+        .attr('transform', 'translate(-35,-35)')
+
+    this.select('g')//top Triangle
+        .append('path')
+        .attr('d', function(d){
+          return 'M 24,28 40,28 32,40 z';
+        })
+        .attr('transform', 'translate(-35,' + (height - 30) + ')')
+        .style('fill', '#044C7F')
+        
+        
+
 
   }
 
@@ -316,7 +332,7 @@ function drawAxesAndLabels(params){
     }, 0))/params.data.length
 
   var avgData = [
-    {value: average, date: 1, label: "Eleven Country Average"},
+    {value: average, date: 1, label: "Eleven-country Average"},
     {value: average, date: 11}
   ]
 
