@@ -262,7 +262,7 @@ function drawAxesAndLabels(params){
         .style('font-size', '18px')
         .style('fill', '#044C7F')
         .attr('x',-10)
-        .attr('y', height + 30)
+        .attr('y', height + 35)
         .text(axesLabels.bottom)    
     this.select('.domain')
         .attr("fill", "url(#svgGradient)")
