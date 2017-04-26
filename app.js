@@ -16,7 +16,7 @@ var dataSet =  {
       {country: "GER", value: 1.064104826992644, rank: 8 },
       {country: "CAN", value: 1-0.247553882107696, rank: 9 },
       {country: "FRA", value: 1-0.41705654741814, rank: 10 },
-      {country: "USA", value: 1-0.706030660985181, rank: 11 }
+      {country: "US", value: 1-0.706030660985181, rank: 11 }
     ],
     title: 'Health System Performance' + elevenCountries
   },
@@ -32,7 +32,7 @@ var dataSet =  {
       {country: 'GER', value: 1-0.12, rank: 8},
       {country: 'CAN', value: 1.15, rank:  6},
       {country: 'FRA', value: 1-0.42, rank: 9},
-      {country: 'USA', value:  1.23, rank:  5}
+      {country: 'US', value:  1.23, rank:  5}
     ],
     title: 'Quality of Healthcare' + elevenCountries
   },
@@ -48,7 +48,7 @@ var dataSet =  {
       {country: 'GER', value: 1.58, rank:  2},
       {country: 'CAN', value: 1-0.77, rank: 10},
       {country: 'FRA', value: 1-0.15, rank: 9},
-      {country: 'USA', value:  1-1.07, rank: 11}
+      {country: 'US', value:  1-1.07, rank: 11}
     ],
     title: 'Access to Healthcare' + elevenCountries
   },
@@ -63,7 +63,7 @@ var dataSet =  {
       {country: 'SWE', value: 2.26, rank:  5},
       {country: 'GER', value: 2.08, rank:  6},
       {country: 'CAN', value: 2.08, rank:  7},
-      {country: 'USA', value:  2-1.21, rank: 10},
+      {country: 'US', value:  2-1.21, rank: 10},
       {country: 'FRA', value: 2-1.41, rank: 11}
     ],
     title: 'Administrative Efficiency' + elevenCountries
@@ -80,7 +80,7 @@ var dataSet =  {
       {country: 'GER', value: 1.01, rank:  5},
       {country: 'CAN', value: 1-0.39, rank: 8},
       {country: 'FRA', value: 1-0.53, rank: 9},
-      {country: 'USA', value:  1-0.76, rank: 11}
+      {country: 'US', value:  1-0.76, rank: 11}
     ],
     title: 'Equity' + elevenCountries
   },
@@ -96,25 +96,9 @@ var dataSet =  {
       {country: 'GER', value: 1-0.18, rank: 8},
       {country: 'CAN', value: 1-0.39, rank: 9},
       {country: 'FRA', value: 1.23, rank:  5},
-      {country: 'USA', value:  1-0.76, rank: 11}
+      {country: 'US', value:  1-0.76, rank: 11}
     ],
     title: 'Healthcare Outcomes' + elevenCountries
-  },
-  spendingData:{
-    data: [
-      {country: 'UK', value:  4094.00, rank:  2},
-      {country: 'AUS', value: 4207.00, rank:  3},
-      {country: 'NETH', value:  5277.00, rank:  7},
-      {country: 'NZ', value:  6432.00, rank:  9},
-      {country: 'NOR', value: 4038.00, rank:  1},
-      {country: 'SWIZ', value:  6787.00, rank:  10},
-      {country: 'SWE', value: 5306.00, rank:  8},
-      {country: 'GER', value: 5119.00, rank:  6},
-      {country: 'CAN', value: 4724.00, rank:  5},
-      {country: 'FRA', value: 4620.00, rank:  4},
-      {country: 'USA', value:  9364.00, rank:  11}
-    ],
-    title: 'Spending per Capita'
   }
 }
 var currentDataSet = dataSet.dataOverall.data;
@@ -230,12 +214,7 @@ var sort_outcomes_btn = controls.append('button')
                 .html('Health Outcomes')
                 .attr('id', 'outcomesBtn')
                 .classed('btn', true)
-var sort_spending_btn = controls.append('button')
-                .html('Spending per Capita')
-                .attr('id', 'spendingBtn')
-                .classed('btn', true)
 function drawAxesAndLabels(params){
-  var usingStandardAxesTitle = true;
   
   var axesLabels = {
     top: 'Higher Performing',
@@ -287,24 +266,7 @@ function drawAxesAndLabels(params){
 
   }
 
-  if(currentDataSet == dataSet.spendingData.data){//change axes title for spending data
-    axesLabels.top = 'Higher Spending';
-    axesLabels.bottom = 'Lower Spending';
-    this.select('.y.axis')
-        .remove()
 
-    yAxesAndLabels.call(this)
-
-    usingStandardAxesTitle = false;
-  }
-
-  if(usingStandardAxesTitle && !params.initialize){//replot y axis on resize
-    this.select('.y.axis')
-        .remove()
-    yAxesAndLabels.call(this)
-
-    usingStandardAxesTitle = true;
-  }
 
   if(params.initialize){
     svg.insert('text')
@@ -632,23 +594,6 @@ sort_outcomes_btn.on('click', function(d){
   })
 })
 
-sort_spending_btn.on('click', function(d){
-  
-  selectBtn($(this)[0].id)
-  currentDataSet = dataSet.spendingData.data;
-  currentTitle = dataSet.spendingData.title;
-  resize.call(chart, {
-    data: currentDataSet,
-    title: currentTitle,
-    axis: {
-      x: xAxis,
-      y: yAxis
-    },
-  initialize: false,
-  height: height,
-  width: width
-  })
-})
 
 
 plot.call(chart, {
