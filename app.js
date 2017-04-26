@@ -254,7 +254,7 @@ function drawAxesAndLabels(params){
         .style('font-size', '18px')
         .style('fill', '#4ABDBC')
         .attr('x',-10)
-        .attr('y',-15)
+        .attr('y',-20)
         .text(axesLabels.top)
 
     this.select('.y.axis')//Bottom Label
@@ -262,7 +262,7 @@ function drawAxesAndLabels(params){
         .style('font-size', '18px')
         .style('fill', '#044C7F')
         .attr('x',-10)
-        .attr('y', height + 25)
+        .attr('y', height + 30)
         .text(axesLabels.bottom)    
     this.select('.domain')
         .attr("fill", "url(#svgGradient)")
@@ -270,14 +270,14 @@ function drawAxesAndLabels(params){
     this.select('g')//top Triangle
         .append('path')
         .attr('d', function(d){
-          return 'M 24,36 40,36 32,22 z';
+          return 'M 22,40 42,40 32,22 z';
         })
         .attr('transform', 'translate(-35,-35)')
 
-    this.select('g')//top Triangle
+    this.select('g')//bottom Triangle
         .append('path')
         .attr('d', function(d){
-          return 'M 24,28 40,28 32,40 z';
+          return 'M 22,28 42,28 32,46 z';
         })
         .attr('transform', 'translate(-35,' + (height - 30) + ')')
         .style('fill', '#044C7F')

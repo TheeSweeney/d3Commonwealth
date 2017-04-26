@@ -19,10 +19,6 @@ body,html{
   stroke: none;
 }
 
-.axis path, .axis line{
-	shape-rendering: crispEdges;
-}
-
 .alignLeft {
 	text-align: left;
 }
