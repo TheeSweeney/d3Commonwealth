@@ -123,7 +123,7 @@ function drawAxesAndLabels(params){
 
   function yAxesAndLabels() {//TODO factor out to prevent code repition in this and exhibit 5
     this.append('g')//y axis
-        .classed('y axis grad', true)
+        .classed('y axis', true)
         .attr('transform', 'translate(0,0)')
         .call(params.axis.y)
 
@@ -152,6 +152,8 @@ function drawAxesAndLabels(params){
           return 'M 22,40 42,40 32,22 z';
         })
         .attr('transform', 'translate(-35,-35)')
+        .style('fill', '#4ABDBC')
+
 
     this.select('g')//bottom Triangle
         .append('path')
