@@ -45,7 +45,6 @@ var y = d3.scale.linear()
             return d.value + .1;
           })])
           .range([height, 0])
-console.log(dataSet.dataOverall.data.length)
 var linearColorScale = d3.scale.linear()
                         .domain([0, dataSet.dataOverall.data.length])
                         .range(['#4ABDBC','#044C7F']);
