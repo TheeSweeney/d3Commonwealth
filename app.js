@@ -252,13 +252,20 @@ function buttonFocus(d){
   if(selectedPoints.length){
     d3.selectAll('.point')
     .attr('fill-opacity', '.4')
+
+    d3.selectAll('.pointLabel')
+    .attr('fill-opacity', '.4')
   
     selectedPoints.forEach(function(country){
       d3.select('#' + country + 'point')
         .attr('fill-opacity', '1')
+      d3.select('#' + country + 'label')
+        .attr('fill-opacity', '1')
     })
   }else{
     d3.selectAll('.point')
+    .attr('fill-opacity', '1')
+    d3.selectAll('.pointLabel')
     .attr('fill-opacity', '1')
   }
 }
@@ -350,6 +357,9 @@ function plot(params){
     .attr('fill', 'black')
     .text(function(d, i){
       return d.country
+    })
+    .attr('id', function(d){
+      return (d.country + 'label');
     })
 
 
