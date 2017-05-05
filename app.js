@@ -248,6 +248,12 @@ function drawAxesAndLabels(params){
 
 
 }
+function buttonFocus(d){
+  d3.selectAll('.point')
+    .attr('fill-opacity', '.4')
+  d3.select('#' + d.country + 'point')
+    .attr('fill-opacity', '1')
+}
 function plot(params){
 
 
@@ -287,6 +293,9 @@ function plot(params){
         .style('fill', function(d,i){
           return linearColorScale(i)
         })
+        .on('click', function(d,i){
+          buttonFocus.call(this, d);
+        })
 
   this.selectAll('.pointLabel')
       .data(params.data)
@@ -307,6 +316,9 @@ function plot(params){
       })
       .attr('cy', function(d){
         return yUpdate(d.value)
+      })
+      .attr('id', function(d){
+        return (d.country + 'point');
       })
   this.selectAll('.pointLabel')
     .transition()
