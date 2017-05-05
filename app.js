@@ -249,11 +249,22 @@ function drawAxesAndLabels(params){
 
 }
 function buttonFocus(d){
-  d3.selectAll('.point')
+  if(selectedPoints.length){
+    d3.selectAll('.point')
     .attr('fill-opacity', '.4')
-  d3.select('#' + d.country + 'point')
+  
+    selectedPoints.forEach(function(country){
+      d3.select('#' + country + 'point')
+        .attr('fill-opacity', '1')
+    })
+  }else{
+    d3.selectAll('.point')
     .attr('fill-opacity', '1')
+  }
 }
+
+var selectedPoints = []
+
 function plot(params){
 
 
@@ -294,7 +305,9 @@ function plot(params){
           return linearColorScale(i)
         })
         .on('click', function(d,i){
+          selectedPoints.includes(d.country) ? selectedPoints.splice(selectedPoints.indexOf(d.country), 1) : selectedPoints.push(d.country);
           buttonFocus.call(this, d);
+          console.log(selectedPoints)
         })
 
   this.selectAll('.pointLabel')
