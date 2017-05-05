@@ -307,7 +307,7 @@ function plot(params){
         .on('click', function(d,i){
           selectedPoints.includes(d.country) ? selectedPoints.splice(selectedPoints.indexOf(d.country), 1) : selectedPoints.push(d.country);
           buttonFocus.call(this, d);
-          console.log(selectedPoints)
+          console.log(d)
         })
 
   this.selectAll('.pointLabel')
@@ -315,6 +315,11 @@ function plot(params){
       .enter()
         .append('text')
         .classed('pointLabel', true)
+        .on('click', function(d,i){
+          selectedPoints.includes(d.country) ? selectedPoints.splice(selectedPoints.indexOf(d.country), 1) : selectedPoints.push(d.country);
+          buttonFocus.call(this, d);
+          // console.log(d)
+        })
         
 
   //update
